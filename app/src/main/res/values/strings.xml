@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">ML Benchmark Group 26</string>
+    <string name="train">Start Training</string>
+    <string name="test">Start Testing</string>
+    <string name="ml_prompt">Choose an algorithm</string>
+
+    <string-array name="ml_arrays">
+        <item>Logistic Regression</item>
+        <item>Náive Bayes Classifier</item>
+        <item>k-Nearest Neighbour</item>
+        <item>SVM</item>
+    </string-array>
+</resources>

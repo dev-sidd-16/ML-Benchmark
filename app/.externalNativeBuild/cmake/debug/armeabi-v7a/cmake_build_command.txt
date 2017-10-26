@@ -1,0 +1,15 @@
+Executable : /Users/siddPrakash/Library/Android/sdk/cmake/3.6.4111459/bin/cmake
+arguments : 
+-H/Users/siddPrakash/MLBenchmarkGroup26/app
+-B/Users/siddPrakash/MLBenchmarkGroup26/app/.externalNativeBuild/cmake/debug/armeabi-v7a
+-GAndroid Gradle - Ninja
+-DANDROID_ABI=armeabi-v7a
+-DANDROID_NDK=/Users/siddPrakash/Library/Android/sdk/ndk-bundle
+-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=/Users/siddPrakash/MLBenchmarkGroup26/app/build/intermediates/cmake/debug/obj/armeabi-v7a
+-DCMAKE_BUILD_TYPE=Debug
+-DCMAKE_MAKE_PROGRAM=/Users/siddPrakash/Library/Android/sdk/cmake/3.6.4111459/bin/ninja
+-DCMAKE_TOOLCHAIN_FILE=/Users/siddPrakash/Library/Android/sdk/ndk-bundle/build/cmake/android.toolchain.cmake
+-DANDROID_PLATFORM=android-17
+-DCMAKE_CXX_FLAGS=
+jvmArgs : 
+
