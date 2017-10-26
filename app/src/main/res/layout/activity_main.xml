@@ -28,7 +28,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight=".5"
                 android:gravity="left|center"
-                android:text="%ge Data Split for Training (0-1)"
+                android:text="Data Split %ge for Training (0-1)"
                 android:textSize="14sp"
                 />
             <EditText
@@ -156,7 +156,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <RadioButton
+                <CheckBox
                     android:id="@+id/Multithread"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -165,7 +165,7 @@
                     android:text="Multi-threaded Processing"
                     android:textSize="10sp" />
 
-                <RadioButton
+                <CheckBox
                     android:id="@+id/GPU"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
