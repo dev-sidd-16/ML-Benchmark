@@ -8,6 +8,6 @@
         <item>Logistic Regression</item>
         <item>Náive Bayes Classifier</item>
         <item>k-Nearest Neighbour</item>
-        <item>SVM</item>
+        <item>Support Vector Machine</item>
     </string-array>
 </resources>

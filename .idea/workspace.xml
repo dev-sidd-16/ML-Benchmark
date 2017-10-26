@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidConfiguredLogFilters">
+    <filters>
+      <filter>
+        <option name="logLevel" value="verbose" />
+        <option name="logMessagePattern" value="" />
+        <option name="logTagPattern" value="MLBENCHMARK" />
+        <option name="name" value="MLBenchmark" />
+        <option name="packageNamePattern" value="" />
+        <option name="pid" value="" />
+      </filter>
+    </filters>
+  </component>
   <component name="AndroidLayouts">
     <shared>
       <config />
     </shared>
+  </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="MLBenchmark" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8b64998b-c709-430a-9b5b-66a541539a0b" name="Default" comment="" />
@@ -33,8 +48,8 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/siddprakash/mlbenchmarkgroup26/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="30" column="51" selection-start-line="30" selection-start-column="51" selection-end-line="30" selection-end-column="51" />
+            <state relative-caret-position="315">
+              <caret line="51" column="11" selection-start-line="51" selection-start-column="11" selection-end-line="51" selection-end-column="11" />
               <folding />
             </state>
           </provider>
@@ -46,20 +61,19 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="207" column="17" selection-start-line="207" selection-start-column="17" selection-end-line="207" selection-end-column="17" />
+            <state relative-caret-position="228">
+              <caret line="203" column="23" selection-start-line="203" selection-start-column="23" selection-end-line="203" selection-end-column="23" />
               <folding>
-                <element signature="e#674#1781#0" expanded="false" />
-                <element signature="e#1791#2403#0" expanded="false" />
-                <element signature="e#2341#2360#0" expanded="true" />
-                <element signature="e#2413#3124#0" expanded="false" />
-                <element signature="e#3134#4181#0" expanded="false" />
-                <element signature="e#4191#5252#0" expanded="false" />
-                <element signature="e#5262#6849#0" expanded="false" />
-                <element signature="e#5830#6824#0" expanded="false" />
-                <element signature="e#6859#7801#0" expanded="false" />
-                <element signature="e#7430#7445#0" expanded="true" />
-                <element signature="e#7759#7773#0" expanded="true" />
+                <element signature="e#674#1787#0" expanded="false" />
+                <element signature="e#1797#2409#0" expanded="false" />
+                <element signature="e#2296#2315#0" expanded="true" />
+                <element signature="e#2419#3129#0" expanded="false" />
+                <element signature="e#3139#4186#0" expanded="false" />
+                <element signature="e#4196#5257#0" expanded="false" />
+                <element signature="e#5267#6860#0" expanded="false" />
+                <element signature="e#6870#7812#0" expanded="false" />
+                <element signature="e#7441#7456#0" expanded="true" />
+                <element signature="e#7770#7784#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -68,8 +82,8 @@
       <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="37" selection-start-line="3" selection-start-column="37" selection-end-line="3" selection-end-column="37" />
+            <state relative-caret-position="60">
+              <caret line="4" column="32" selection-start-line="4" selection-start-column="32" selection-end-line="4" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -2217,7 +2231,7 @@
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3286119" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32956383" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -2259,16 +2273,16 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="37" selection-start-line="3" selection-start-column="37" selection-end-line="3" selection-end-column="37" />
+        <state relative-caret-position="60">
+          <caret line="4" column="32" selection-start-line="4" selection-start-column="32" selection-end-line="4" selection-end-column="32" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/siddprakash/mlbenchmarkgroup26/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="30" column="51" selection-start-line="30" selection-start-column="51" selection-end-line="30" selection-end-column="51" />
+        <state relative-caret-position="315">
+          <caret line="51" column="11" selection-start-line="51" selection-start-column="11" selection-end-line="51" selection-end-column="11" />
           <folding />
         </state>
       </provider>
@@ -2278,20 +2292,19 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="207" column="17" selection-start-line="207" selection-start-column="17" selection-end-line="207" selection-end-column="17" />
+        <state relative-caret-position="228">
+          <caret line="203" column="23" selection-start-line="203" selection-start-column="23" selection-end-line="203" selection-end-column="23" />
           <folding>
-            <element signature="e#674#1781#0" expanded="false" />
-            <element signature="e#1791#2403#0" expanded="false" />
-            <element signature="e#2341#2360#0" expanded="true" />
-            <element signature="e#2413#3124#0" expanded="false" />
-            <element signature="e#3134#4181#0" expanded="false" />
-            <element signature="e#4191#5252#0" expanded="false" />
-            <element signature="e#5262#6849#0" expanded="false" />
-            <element signature="e#5830#6824#0" expanded="false" />
-            <element signature="e#6859#7801#0" expanded="false" />
-            <element signature="e#7430#7445#0" expanded="true" />
-            <element signature="e#7759#7773#0" expanded="true" />
+            <element signature="e#674#1787#0" expanded="false" />
+            <element signature="e#1797#2409#0" expanded="false" />
+            <element signature="e#2296#2315#0" expanded="true" />
+            <element signature="e#2419#3129#0" expanded="false" />
+            <element signature="e#3139#4186#0" expanded="false" />
+            <element signature="e#4196#5257#0" expanded="false" />
+            <element signature="e#5267#6860#0" expanded="false" />
+            <element signature="e#6870#7812#0" expanded="false" />
+            <element signature="e#7441#7456#0" expanded="true" />
+            <element signature="e#7770#7784#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -28,11 +28,11 @@
                 android:layout_height="match_parent"
                 android:layout_weight=".5"
                 android:gravity="left|center"
-                android:text="Data Split %ge for Training (0-1)"
+                android:text="Data Split %ge for Training (0.01-0.99)"
                 android:textSize="14sp"
                 />
             <EditText
-                android:id="@+id/PSplit"
+                android:id="@+id/DSplit"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight=".5"
@@ -55,8 +55,8 @@
                 android:id="@+id/ML_spinner"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
-                android:entries="@array/ml_arrays"
                 android:prompt="@string/ml_prompt"
+                android:entries="@array/ml_arrays"
                 />
         </LinearLayout>
 
@@ -74,7 +74,7 @@
                 android:layout_marginLeft="100dp"
                 android:layout_marginRight="100dp"
                 android:background="@android:color/darker_gray"
-                android:text="Select Algorithm" />/>
+                android:text="Save Parameters" />/>
         </LinearLayout>
 
         <LinearLayout
@@ -156,7 +156,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <CheckBox
+                <RadioButton
                     android:id="@+id/Multithread"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -165,7 +165,7 @@
                     android:text="Multi-threaded Processing"
                     android:textSize="10sp" />
 
-                <CheckBox
+                <RadioButton
                     android:id="@+id/GPU"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"

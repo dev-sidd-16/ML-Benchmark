@@ -2,13 +2,28 @@ package com.example.siddprakash.mlbenchmarkgroup26;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+
+    private String TAG = "MLBENCHMARK";
+
+    private float dataSplit = 0.5f;
+    private int algorithm = 0;
+
+    private EditText dSplit;
+    private Spinner algo;
+    private Button algoButton;
+
 
     // Used to load the 'native-lib' library on application startup.
     static {
@@ -24,15 +39,22 @@ public class MainActivity extends AppCompatActivity {
         TextView tv = (TextView) findViewById(R.id.datasetName);
         tv.setText(stringFromJNI());
 
-        Spinner spinner = (Spinner) findViewById(R.id.ML_spinner);
-// Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.ml_arrays, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
-        spinner.setAdapter(adapter);
+        dSplit = (EditText) findViewById(R.id.DSplit);
+        dSplit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                // TODO Auto-generated method stub
+                dataSplit = Float.valueOf(v.getText().toString());
+                Log.d(TAG, "Data Split= "+dataSplit*100+"%");
+                return false;
+            }
+        });
+
+
+
+        algo = (Spinner) findViewById(R.id.ML_spinner);
+        algo.setOnItemSelectedListener(new SpinnerActivity());
 
     }
 
@@ -42,9 +64,34 @@ public class MainActivity extends AppCompatActivity {
                                    int pos, long id) {
             // An item was selected. You can retrieve the selected item using
             // parent.getItemAtPosition(pos)
+
+            switch (parent.getItemAtPosition(pos).toString()){
+                case "Logistic Regression": algorithm = 1;
+                    Toast.makeText(parent.getContext(),
+                            "ML Algorithm selected : " + parent.getItemAtPosition(pos).toString(),
+                            Toast.LENGTH_SHORT).show();
+                    break;
+                case "Náive Bayes Classifier": algorithm = 2;
+                    Toast.makeText(parent.getContext(),
+                            "ML Algorithm selected : " + parent.getItemAtPosition(pos).toString(),
+                            Toast.LENGTH_SHORT).show();
+                    break;
+                case "k-Nearest Neighbour": algorithm = 3;
+                    Toast.makeText(parent.getContext(),
+                            "ML Algorithm selected : " + parent.getItemAtPosition(pos).toString(),
+                            Toast.LENGTH_SHORT).show();
+                    break;
+                case "Support Vector Machine": algorithm = 4;
+                    Toast.makeText(parent.getContext(),
+                            "ML Algorithm selected : " + parent.getItemAtPosition(pos).toString(),
+                            Toast.LENGTH_SHORT).show();
+                    break;
+                default: Toast.makeText(MainActivity.this, "None", Toast.LENGTH_LONG).show();
+            }
+            Log.d(TAG, "Algorithm selected: "+algorithm);
         }
 
-        public void onNothingSelected(AdapterView<?> parent) {
+        public void onNothingSelected(AdapterView<?> arg0) {
             // Another interface callback
         }
     }
