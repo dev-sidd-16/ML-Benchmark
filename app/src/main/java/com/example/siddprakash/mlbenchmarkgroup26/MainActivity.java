@@ -1,5 +1,9 @@
 package com.example.siddprakash.mlbenchmarkgroup26;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.res.AssetManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +17,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 public class MainActivity extends AppCompatActivity {
 
     private String TAG = "MLBENCHMARK";
@@ -22,7 +31,10 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText dSplit;
     private Spinner algo;
-    private Button algoButton;
+    private Button saveParams;
+
+    private Context context;
+    private String jsonTrainData;
 
 
     // Used to load the 'native-lib' library on application startup.
@@ -39,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         TextView tv = (TextView) findViewById(R.id.datasetName);
         tv.setText(stringFromJNI());
 
+        // Get the split percentage value from text input
         dSplit = (EditText) findViewById(R.id.DSplit);
         dSplit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 
@@ -51,11 +64,74 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
+        // Get the type of ML algorithm selected by the user
         algo = (Spinner) findViewById(R.id.ML_spinner);
         algo.setOnItemSelectedListener(new SpinnerActivity());
 
+        // Read the data set file
+
+        saveParams = (Button) findViewById(R.id.algoButton);
+        saveParams.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               try {
+                   jsonTrainData = getJsonFromResource(context, dataSplit);
+                   System.out.println(jsonTrainData);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
+        // Create the training - testing split of the data set file
+
+
+        // Training Code
+        // Send the data set file to server
+
+
+        // Testing Code
+
+    }
+
+    public static String getJsonFromResource(Context context, float dSplit) throws IOException {
+
+        AssetManager text = context.getAssets();
+        InputStream inputStream = text.open("breast-cancer-wisconsin.data");
+        System.out.println(inputStream);
+        BufferedReader r = new BufferedReader( new InputStreamReader( inputStream ) );
+        StringBuilder stringBuilder = new StringBuilder();
+        String line;
+        String jsonString = null;
+        int lineCount = 0;
+        int limit;
+        int count = 0;
+
+        try {
+            while ((line = r.readLine()) != null) {
+
+                lineCount++;
+            }
+        }
+        catch (Exception e) {
+            Log.e( "GetJsonFromResource", Log.getStackTraceString( e ) );
+        }
+
+        limit = (int) (dSplit * lineCount);
+
+        r = new BufferedReader(new InputStreamReader(inputStream));
+        try {
+            while (count <= limit ) {
+                line = r.readLine();
+                stringBuilder.append( line );
+            }
+            jsonString = stringBuilder.toString();
+        }
+        catch (Exception e) {
+            Log.e( "GetJsonFromResource", Log.getStackTraceString( e ) );
+        }
+        return jsonString;
     }
 
     public class SpinnerActivity extends MainActivity implements AdapterView.OnItemSelectedListener {
