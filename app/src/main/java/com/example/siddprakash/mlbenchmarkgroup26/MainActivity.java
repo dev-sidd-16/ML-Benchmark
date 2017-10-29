@@ -75,9 +75,7 @@ public class MainActivity extends AppCompatActivity {
         algo = (Spinner) findViewById(R.id.ML_spinner);
         algo.setOnItemSelectedListener(new SpinnerActivity());
 
-        // Read the data set file
-//        AssetManager text = context.getAssets();
-
+        // Read and Create the training - testing split of the data set file
 
         saveParams = (Button) findViewById(R.id.algoButton);
         saveParams.setOnClickListener(new View.OnClickListener() {
@@ -85,9 +83,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d(TAG,"Button Clicked");
                try {
-                   
                    jsonTrainData = getJsonFromResource(dataSplit);
                    Log.d(TAG,"JSON DATA: "+jsonTrainData);
+                   Toast.makeText(MainActivity.this, "Dataset Split Created", Toast.LENGTH_LONG).show();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -131,12 +129,13 @@ public class MainActivity extends AppCompatActivity {
 
         limit = (int) (dSplit * lineCount);
 
-        System.out.println("Number of lines in limit: "+limit);
+        System.out.println("Number of lines in training limit: "+limit);
         fIn = new FileInputStream(myFile);
         r = new BufferedReader(new InputStreamReader(fIn));
         try {
             while (count <= limit ) {
                 line = r.readLine();
+                // Create JSONObject(?)
                 stringBuilder.append( line );
                 count++;
             }
