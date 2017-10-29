@@ -3,15 +3,6 @@
 
     <item
         is-multidex="true"
-        jar="/Users/siddPrakash/.android/build-cache/8af12062e3625cae6ec91050b94c20b23a043d3c/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="952944218ecedea1554a513dec0c14d570642843">
-        <dex dex="/Users/siddPrakash/MLBenchmarkGroup26/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_d75e299fa660a5684191d1b54483f0b5b3f898cc/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="/Users/siddPrakash/.android/build-cache/eb3b5bcb626334c794025fbdcc4cb322462bb22e/output/jars/classes.jar"
         jumboMode="true"
         optimize="true"
@@ -21,12 +12,12 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/siddPrakash/.android/build-cache/18800567cdc0ca0368c8f9067b32090bc48e8344/output/jars/classes.jar"
+        jar="/Users/siddPrakash/MLBenchmarkGroup26/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="26.0.1"
-        sha1="fcd01fd11233459f546c437ec927e9b61bf7caf1">
-        <dex dex="/Users/siddPrakash/MLBenchmarkGroup26/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_9260c90e3f7dbbf9faf50f0cbe4c878bc64836f1/classes.dex" />
+        sha1="a54971b3cd7c91e9232ae82f5608d7d8f7cf6ea2">
+        <dex dex="/Users/siddPrakash/MLBenchmarkGroup26/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_c015e05fd75049305f06f8d3ecf48e01205a8efe/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -39,15 +30,6 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/siddPrakash/MLBenchmarkGroup26/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="c89d33982cc65072096e36f6b51f45b25cdc5dad">
-        <dex dex="/Users/siddPrakash/MLBenchmarkGroup26/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_c015e05fd75049305f06f8d3ecf48e01205a8efe/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="/Users/siddPrakash/MLBenchmarkGroup26/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
         jumboMode="true"
         optimize="true"
@@ -57,21 +39,39 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/siddPrakash/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/26.0.0-alpha1/support-annotations-26.0.0-alpha1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="023ee503b631f69511e335a061ea008f8da60f40">
-        <dex dex="/Users/siddPrakash/MLBenchmarkGroup26/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-26.0.0-alpha1_9740211a66879aeeb8e8a695bab33c76d175a7ba/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="/Users/siddPrakash/.android/build-cache/6100444610615403b37c2a1e816a8c9c89cefafc/output/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="26.0.1"
         sha1="8df0e365e40beb151bc42dee20817721a6cab7b0">
         <dex dex="/Users/siddPrakash/MLBenchmarkGroup26/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_875c9303faf4a83b655e2197e3b4542a1616db09/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/siddPrakash/.android/build-cache/8af12062e3625cae6ec91050b94c20b23a043d3c/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="952944218ecedea1554a513dec0c14d570642843">
+        <dex dex="/Users/siddPrakash/MLBenchmarkGroup26/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_d75e299fa660a5684191d1b54483f0b5b3f898cc/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/siddPrakash/.android/build-cache/18800567cdc0ca0368c8f9067b32090bc48e8344/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="fcd01fd11233459f546c437ec927e9b61bf7caf1">
+        <dex dex="/Users/siddPrakash/MLBenchmarkGroup26/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_9260c90e3f7dbbf9faf50f0cbe4c878bc64836f1/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/siddPrakash/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/26.0.0-alpha1/support-annotations-26.0.0-alpha1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="023ee503b631f69511e335a061ea008f8da60f40">
+        <dex dex="/Users/siddPrakash/MLBenchmarkGroup26/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-26.0.0-alpha1_9740211a66879aeeb8e8a695bab33c76d175a7ba/classes.dex" />
     </item>
     <item
         is-multidex="true"

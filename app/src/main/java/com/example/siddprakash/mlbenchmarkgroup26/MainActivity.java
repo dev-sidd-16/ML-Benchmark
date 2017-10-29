@@ -1,9 +1,11 @@
 package com.example.siddprakash.mlbenchmarkgroup26;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +20,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -35,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
 
     private Context context;
     private String jsonTrainData;
+
+    private static final int REQUEST_ID_READ_PERMISSION = 100;
+    private static final int REQUEST_ID_WRITE_PERMISSION = 200;
 
 
     // Used to load the 'native-lib' library on application startup.
@@ -69,14 +76,18 @@ public class MainActivity extends AppCompatActivity {
         algo.setOnItemSelectedListener(new SpinnerActivity());
 
         // Read the data set file
+//        AssetManager text = context.getAssets();
+
 
         saveParams = (Button) findViewById(R.id.algoButton);
         saveParams.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d(TAG,"Button Clicked");
                try {
-                   jsonTrainData = getJsonFromResource(context, dataSplit);
-                   System.out.println(jsonTrainData);
+                   
+                   jsonTrainData = getJsonFromResource(dataSplit);
+                   Log.d(TAG,"JSON DATA: "+jsonTrainData);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -95,12 +106,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public static String getJsonFromResource(Context context, float dSplit) throws IOException {
+    public static String getJsonFromResource(float dSplit) throws IOException {
 
-        AssetManager text = context.getAssets();
-        InputStream inputStream = text.open("breast-cancer-wisconsin.data");
-        System.out.println(inputStream);
-        BufferedReader r = new BufferedReader( new InputStreamReader( inputStream ) );
+        File myFile = new File(Environment.getExternalStorageDirectory()+"/Android/data/MLBenchmark/breast-cancer-wisconsin.data");
+        FileInputStream fIn = new FileInputStream(myFile);
+        BufferedReader r = new BufferedReader( new InputStreamReader( fIn ) );
         StringBuilder stringBuilder = new StringBuilder();
         String line;
         String jsonString = null;
@@ -113,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
 
                 lineCount++;
             }
+            System.out.println("Number of lines: "+lineCount);
         }
         catch (Exception e) {
             Log.e( "GetJsonFromResource", Log.getStackTraceString( e ) );
@@ -120,11 +131,14 @@ public class MainActivity extends AppCompatActivity {
 
         limit = (int) (dSplit * lineCount);
 
-        r = new BufferedReader(new InputStreamReader(inputStream));
+        System.out.println("Number of lines in limit: "+limit);
+        fIn = new FileInputStream(myFile);
+        r = new BufferedReader(new InputStreamReader(fIn));
         try {
             while (count <= limit ) {
                 line = r.readLine();
                 stringBuilder.append( line );
+                count++;
             }
             jsonString = stringBuilder.toString();
         }
