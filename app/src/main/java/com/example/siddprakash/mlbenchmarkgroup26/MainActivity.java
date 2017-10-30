@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
+import android.os.AsyncTask;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +19,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -36,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText dSplit;
     private Spinner algo;
     private Button saveParams;
+    private Button trainButton;
+    private Button testButton;
 
     private Context context;
     private String jsonTrainData;
@@ -81,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         saveParams.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG,"Button Clicked");
+                Log.d(TAG,"Save Params Button Clicked");
                try {
                    jsonTrainData = getJsonFromResource(dataSplit);
                    Log.d(TAG,"JSON DATA: "+jsonTrainData);
@@ -93,11 +98,17 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        // Create the training - testing split of the data set file
-
-
         // Training Code
         // Send the data set file to server
+        trainButton = (Button) findViewById(R.id.trainbutton);
+        trainButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG,"Training Button Clicked");
+                new HttpAsyncTask().execute("http://hmkcode.appspot.com/jsonservlet");
+            }
+        });
+
 
 
         // Testing Code
@@ -135,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             while (count <= limit ) {
                 line = r.readLine();
-                // Create JSONObject(?)
+                // Create JSONObject(?) of split data set and add the type of ML algorithm
                 stringBuilder.append( line );
                 count++;
             }
@@ -185,9 +196,77 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public static String POST(String url, String trainData){
+        InputStream inputStream = null;
+        String result = "";
+        try {
+
+            // 1. create HttpClient
+            HttpClient httpclient = new DefaultHttpClient();
+
+            // 2. make POST request to the given URL
+            HttpPost httpPost = new HttpPost(url);
+
+            String json = "";
+
+            // 3. build jsonObject
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.accumulate("name", person.getName());
+            jsonObject.accumulate("country", person.getCountry());
+            jsonObject.accumulate("twitter", person.getTwitter());
+
+            // 4. convert JSONObject to JSON to String
+            json = jsonObject.toString();
+
+            // ** Alternative way to convert Person object to JSON string usin Jackson Lib
+            // ObjectMapper mapper = new ObjectMapper();
+            // json = mapper.writeValueAsString(person);
+
+            // 5. set json to StringEntity
+            StringEntity se = new StringEntity(json);
+
+            // 6. set httpPost Entity
+            httpPost.setEntity(se);
+
+            // 7. Set some headers to inform server about the type of the content
+            httpPost.setHeader("Accept", "application/json");
+            httpPost.setHeader("Content-type", "application/json");
+
+            // 8. Execute POST request to the given URL
+            HttpResponse httpResponse = httpclient.execute(httpPost);
+
+            // 9. receive response as inputStream
+            inputStream = httpResponse.getEntity().getContent();
+
+            // 10. convert inputstream to string
+            if(inputStream != null)
+                result = convertInputStreamToString(inputStream);
+            else
+                result = "Did not work!";
+
+        } catch (Exception e) {
+            Log.d("InputStream", e.getLocalizedMessage());
+        }
+
+        // 11. return result
+        return result;
+    }
+
+    private class HttpAsyncTask extends AsyncTask<String, void, String>{
+        @Override
+        protected String doInBackground(String... urls) {
+            return POST(urls[0],jsonTrainData);;
+        }
+        @Override
+        protected void onPostExecute(String result) {
+            Toast.makeText(getBaseContext(), "Data Sent for Training!", Toast.LENGTH_LONG).show();
+        }
+    }
+
     /**
      * A native method that is implemented by the 'native-lib' native library,
      * which is packaged with this application.
      */
     public native String stringFromJNI();
+
 }
