@@ -34,6 +34,17 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+
+import weka.classifiers.Classifier;
+import weka.classifiers.Evaluation;
+import weka.classifiers.functions.SMO;
+import weka.core.Instances;
+import weka.core.converters.ConverterUtils.DataSource;
+import weka.gui.*;
+
+import static com.example.siddprakash.mlbenchmarkgroup26.R.string.test;
+import static com.example.siddprakash.mlbenchmarkgroup26.R.string.train;
+
 public class MainActivity extends AppCompatActivity {
 
     private String TAG = "MLBENCHMARK";
@@ -106,13 +117,50 @@ public class MainActivity extends AppCompatActivity {
         // Training Code
         // Send the data set file to server
         trainButton = (Button) findViewById(R.id.trainbutton);
-        trainButton.setOnClickListener(new View.OnClickListener() {
+
+        //        trainButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Log.d(TAG,"Training Button Clicked");
+//                new HttpAsyncTask().execute("http://hmkcode.appspot.com/jsonservlet");
+//            }
+//        });
+
+
+        testButton = (Button) findViewById(R.id.testbutton);
+        testButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG,"Training Button Clicked");
-                new HttpAsyncTask().execute("http://hmkcode.appspot.com/jsonservlet");
+                Log.d(TAG,"Testing Button Clicked");
+
+
+                try {
+                    DataSource source = new DataSource(Environment.getExternalStorageDirectory()+"/Android/data/MLBenchmark/breast-cancer-wisconsin.data");
+
+                Instances trainingSet = null;
+                    trainingSet = source.getDataSet();
+                if (trainingSet.classIndex() == -1)
+                    trainingSet.setClassIndex(trainingSet.numAttributes() - 1);
+
+                trainingSet.randomize(new java.util.Random(0));
+                int trainSize = (int) Math.round(trainingSet.numInstances() * 0.8);
+                int testSize = trainingSet.numInstances() - trainSize;
+                Instances train = new Instances(trainingSet, 0, trainSize);
+                Instances test = new Instances(trainingSet, trainSize, testSize);
+//                SMO classifier = new SMO();
+//                classifier.buildClassifier(train);
+//                weka.core.SerializationHelper.write("abc.model", classifier);
+                Classifier cls = (Classifier) weka.core.SerializationHelper.read("/Users/siddPrakash/Dropbox (ASU)/Fall 2017/MC/abc.model");
+                Evaluation eval = new Evaluation(train);
+                eval.evaluateModel(cls, test);
+
+                System.out.println(eval.toSummaryString("\nResults\n======\n", false));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
+
 
 
 
@@ -201,6 +249,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /*
     public static String POST(String url, String trainData){
         InputStream inputStream = null;
         String result = "";
@@ -268,6 +317,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+*/
     /**
      * A native method that is implemented by the 'native-lib' native library,
      * which is packaged with this application.
