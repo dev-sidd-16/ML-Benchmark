@@ -30,6 +30,7 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -135,13 +136,14 @@ public class MainActivity extends AppCompatActivity {
 
 
                 try {
-                    DataSource source = new DataSource(Environment.getExternalStorageDirectory()+"/Android/data/MLBenchmark/breast-cancer-wisconsin.data");
+//                    DataSource source = new DataSource(Environment.getExternalStorageDirectory()+"/Android/data/MLBenchmark/breast-cancer-wisconsin.csv");
+//
 
-                Instances trainingSet = null;
-                    trainingSet = source.getDataSet();
+                    BufferedReader source = new BufferedReader(new FileReader(Environment.getExternalStorageDirectory()+"/Android/data/MLBenchmark/breast-cancer-wisconsin.txt"));
+                Instances trainingSet = new Instances(source);
                 if (trainingSet.classIndex() == -1)
                     trainingSet.setClassIndex(trainingSet.numAttributes() - 1);
-
+                    trainingSet.deleteAttributeAt(0);
                 trainingSet.randomize(new java.util.Random(0));
                 int trainSize = (int) Math.round(trainingSet.numInstances() * 0.8);
                 int testSize = trainingSet.numInstances() - trainSize;
@@ -150,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
 //                SMO classifier = new SMO();
 //                classifier.buildClassifier(train);
 //                weka.core.SerializationHelper.write("abc.model", classifier);
-                Classifier cls = (Classifier) weka.core.SerializationHelper.read("/Users/siddPrakash/Dropbox (ASU)/Fall 2017/MC/abc.model");
+                Classifier cls = (Classifier) weka.core.SerializationHelper.read(Environment.getExternalStorageDirectory()+"/Android/data/MLBenchmark/abc.model");
                 Evaluation eval = new Evaluation(train);
                 eval.evaluateModel(cls, test);
 

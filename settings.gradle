@@ -1,1 +1,1 @@
-include ':app', ':weka-stable-3.8.1', ':weka-stable-3.8.0'
+include ':app', ':weka-stable-3.8.1', ':weka-stable-3.8.0', ':wekaSTRIPPED'

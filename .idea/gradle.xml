@@ -11,6 +11,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/weka-stable-3.8.0" />
             <option value="$PROJECT_DIR$/weka-stable-3.8.1" />
+            <option value="$PROJECT_DIR$/wekaSTRIPPED" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
