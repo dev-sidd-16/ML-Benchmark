@@ -30,10 +30,13 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 
 
 import weka.classifiers.Classifier;
@@ -60,7 +63,10 @@ public class MainActivity extends AppCompatActivity {
     private Button testButton;
 
     private Context context;
-    private String jsonTrainData;
+    private String trainData;
+    private String trainFile;
+
+
 
     private static final int REQUEST_ID_READ_PERMISSION = 100;
     private static final int REQUEST_ID_WRITE_PERMISSION = 200;
@@ -73,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -100,14 +107,17 @@ public class MainActivity extends AppCompatActivity {
         // Read and Create the training - testing split of the data set file
 
         saveParams = (Button) findViewById(R.id.algoButton);
+        trainFile = "trainFile.csv";
+
         saveParams.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG,"Save Params Button Clicked");
                try {
-                   jsonTrainData = getJsonFromResource(dataSplit);
-                   Log.d(TAG,"JSON DATA: "+jsonTrainData);
-                   Toast.makeText(MainActivity.this, "Dataset Split Created", Toast.LENGTH_LONG).show();
+                   trainData = createPartition(dataSplit, trainFile);
+                   System.out.println(trainData);
+//                   Log.d(TAG,"JSON DATA: "+jsonTrainData);
+                   Toast.makeText(MainActivity.this, "Split Dataset Created", Toast.LENGTH_LONG).show();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -118,63 +128,69 @@ public class MainActivity extends AppCompatActivity {
         // Training Code
         // Send the data set file to server
         trainButton = (Button) findViewById(R.id.trainbutton);
-
-        //        trainButton.setOnClickListener(new View.OnClickListener() {
+//        trainButton.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
 //                Log.d(TAG,"Training Button Clicked");
-//                new HttpAsyncTask().execute("http://hmkcode.appspot.com/jsonservlet");
+//                try {
+////                    new HttpAsyncTask().execute("http://hmkcode.appspot.com/jsonservlet");
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//
 //            }
 //        });
 
+        // Testing Code
 
         testButton = (Button) findViewById(R.id.testbutton);
         testButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG,"Testing Button Clicked");
-
-
                 try {
-//                    DataSource source = new DataSource(Environment.getExternalStorageDirectory()+"/Android/data/MLBenchmark/breast-cancer-wisconsin.csv");
-//
 
-                    BufferedReader source = new BufferedReader(new FileReader(Environment.getExternalStorageDirectory()+"/Android/data/MLBenchmark/breast-cancer-wisconsin.txt"));
-                Instances trainingSet = new Instances(source);
-                if (trainingSet.classIndex() == -1)
-                    trainingSet.setClassIndex(trainingSet.numAttributes() - 1);
-                    trainingSet.deleteAttributeAt(0);
-                trainingSet.randomize(new java.util.Random(0));
-                int trainSize = (int) Math.round(trainingSet.numInstances() * 0.8);
-                int testSize = trainingSet.numInstances() - trainSize;
-                Instances train = new Instances(trainingSet, 0, trainSize);
-                Instances test = new Instances(trainingSet, trainSize, testSize);
-//                SMO classifier = new SMO();
-//                classifier.buildClassifier(train);
-//                weka.core.SerializationHelper.write("abc.model", classifier);
-                Classifier cls = (Classifier) weka.core.SerializationHelper.read(Environment.getExternalStorageDirectory()+"/Android/data/MLBenchmark/abc.model");
-                Evaluation eval = new Evaluation(train);
-                eval.evaluateModel(cls, test);
+                    Instances train = getDataFromResource(dataSplit, "Train");
+                    Instances test = getDataFromResource(dataSplit, "Test");
 
-                System.out.println(eval.toSummaryString("\nResults\n======\n", false));
+
+                    SMO classifier = new SMO();
+                    //classifier.buildClassifier(train);
+                    //weka.core.SerializationHelper.write("abc.model", classifier);
+                    String model;
+                    switch (algorithm){
+                        case 2: model = "naivebayes.model";
+                            break;
+                        case 3: model = "knn.model";
+                            break;
+                        case 4: model = "svm.model";
+                            break;
+                        case 1:
+
+                        default: model = "linearregression.model";
+                            break;
+                    }
+
+//                    Classifier cls = (Classifier) weka.core.SerializationHelper.read(Environment.getExternalStorageDirectory()+"/Android/data/MLBenchmark/"+model);
+                    Classifier cls = (Classifier) weka.core.SerializationHelper.read(Environment.getExternalStorageDirectory()+"/Android/data/MLBenchmark/abc.model");
+                    Evaluation eval = new Evaluation(train);
+                    eval.evaluateModel(cls, test);
+
+                    System.out.println(eval.toSummaryString("\nResults\n======\n", false));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
 
-
-
-
-        // Testing Code
-
     }
 
-    public static String getJsonFromResource(float dSplit) throws IOException {
+    private String createPartition(float dataSplit, String fName) throws IOException {
 
         File myFile = new File(Environment.getExternalStorageDirectory()+"/Android/data/MLBenchmark/breast-cancer-wisconsin.data");
         FileInputStream fIn = new FileInputStream(myFile);
         BufferedReader r = new BufferedReader( new InputStreamReader( fIn ) );
+
         StringBuilder stringBuilder = new StringBuilder();
         String line;
         String jsonString = null;
@@ -193,15 +209,20 @@ public class MainActivity extends AppCompatActivity {
             Log.e( "GetJsonFromResource", Log.getStackTraceString( e ) );
         }
 
-        limit = (int) (dSplit * lineCount);
+        limit = (int) (dataSplit * lineCount);
 
         System.out.println("Number of lines in training limit: "+limit);
         fIn = new FileInputStream(myFile);
         r = new BufferedReader(new InputStreamReader(fIn));
+
+        File outFile = new File(Environment.getExternalStorageDirectory()+"/Android/data/MLBenchmark/"+fName);
+        FileOutputStream fOut = new FileOutputStream(outFile);
+        PrintWriter pw = new PrintWriter(fOut);
+
         try {
             while (count <= limit ) {
                 line = r.readLine();
-                // Create JSONObject(?) of split data set and add the type of ML algorithm
+                pw.println(line);
                 stringBuilder.append( line );
                 count++;
             }
@@ -210,7 +231,38 @@ public class MainActivity extends AppCompatActivity {
         catch (Exception e) {
             Log.e( "GetJsonFromResource", Log.getStackTraceString( e ) );
         }
+        pw.flush();
+        pw.close();
+        fOut.close();
+
         return jsonString;
+
+    }
+
+    public static Instances getDataFromResource(float dSplit, String status) throws IOException {
+
+        //TODO: Convert breast-cancer-wisconsin.data to breast-cancer-wisconsin.txt
+
+        File myFile = new File(Environment.getExternalStorageDirectory()+"/Android/data/MLBenchmark/breast-cancer-wisconsin.txt");
+        FileInputStream fIn = new FileInputStream(myFile);
+        BufferedReader r = new BufferedReader( new InputStreamReader( fIn ) );
+
+        Instances trainingSet = new Instances(r);
+        if (trainingSet.classIndex() == -1)
+            trainingSet.setClassIndex(trainingSet.numAttributes() - 1);
+
+        trainingSet.deleteAttributeAt(0);
+        trainingSet.randomize(new java.util.Random(0));
+
+        int trainSize = (int) Math.round(trainingSet.numInstances() * dSplit);
+        int testSize = trainingSet.numInstances() - trainSize;
+        Instances train = new Instances(trainingSet, 0, trainSize);
+        Instances test = new Instances(trainingSet, trainSize, testSize);
+
+        if(status.equalsIgnoreCase("Train"))
+            return train;
+        else
+            return test;
     }
 
     public class SpinnerActivity extends MainActivity implements AdapterView.OnItemSelectedListener {
@@ -319,7 +371,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-*/
+
     /**
      * A native method that is implemented by the 'native-lib' native library,
      * which is packaged with this application.
