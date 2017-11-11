@@ -183,6 +183,20 @@ public class MainActivity extends AppCompatActivity {
                     eval.evaluateModel(cls, test);
 
                     System.out.println(eval.toSummaryString("\nResults\n======\n", false));
+
+                    double trr = eval.trueNegativeRate(0) * 100;
+                    double tar = eval.truePositiveRate(0) * 100;
+                    double frr = eval.falseNegativeRate(0) * 100;
+                    double far = eval.falsePositiveRate(0) * 100;
+                    double hter = (frr + far) / 2.0;
+
+                    System.out.println("True Accept Rate (TAR): "+tar+" %");
+                    System.out.println("True Reject Rate (TAR): "+trr+" %");
+                    System.out.println("False Accept Rate (TAR): "+far+" %");
+                    System.out.println("False Reject Rate (TAR): "+frr+" %");
+                    System.out.println("HTER: "+hter+" %");
+
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
