@@ -15,9 +15,6 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
-//        maven {
-//            url "https://mvnrepository.com/artifact/nz.ac.waikato.cms.weka/weka-stable/3.8.1"
-//        }
     }
 }
 
