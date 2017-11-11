@@ -28,6 +28,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -36,7 +37,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 
 import weka.classifiers.Classifier;
@@ -65,6 +70,11 @@ public class MainActivity extends AppCompatActivity {
     private Context context;
     private String trainData;
     private String trainFile;
+
+    private static final String uploadFilePath = Environment.getExternalStorageDirectory() + "/Android/Data/MLBenchmark/";
+    private static final String downloadFilePath = Environment.getExternalStorageDirectory() + "/Android/Data/MLBenchmark/";
+    public static final String upLoadURL = "http://10.218.110.136/CSE535Fall17Folder/UploadToServer.php";
+    public static final String downloadUrl = "http://10.218.110.136/CSE535Fall17Folder/";
 
 
 
@@ -107,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
         // Read and Create the training - testing split of the data set file
 
         saveParams = (Button) findViewById(R.id.algoButton);
-        trainFile = "trainFile.csv";
+        trainFile = "trainFile"+algorithm+".csv";
 
         saveParams.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,7 +126,6 @@ public class MainActivity extends AppCompatActivity {
                try {
                    trainData = createPartition(dataSplit, trainFile);
                    System.out.println(trainData);
-//                   Log.d(TAG,"JSON DATA: "+jsonTrainData);
                    Toast.makeText(MainActivity.this, "Split Dataset Created", Toast.LENGTH_LONG).show();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -128,18 +137,15 @@ public class MainActivity extends AppCompatActivity {
         // Training Code
         // Send the data set file to server
         trainButton = (Button) findViewById(R.id.trainbutton);
-//        trainButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Log.d(TAG,"Training Button Clicked");
-//                try {
-////                    new HttpAsyncTask().execute("http://hmkcode.appspot.com/jsonservlet");
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//
-//            }
-//        });
+        trainButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG,"Training Button Clicked");
+                UploadTask uploadTask = new UploadTask(MainActivity.this);
+                uploadTask.execute(uploadFilePath + trainFile);
+
+            }
+        });
 
         // Testing Code
 
@@ -154,12 +160,12 @@ public class MainActivity extends AppCompatActivity {
                     Instances test = getDataFromResource(dataSplit, "Test");
 
 
-                    SMO classifier = new SMO();
+                    //SMO classifier = new SMO();
                     //classifier.buildClassifier(train);
                     //weka.core.SerializationHelper.write("abc.model", classifier);
                     String model;
                     switch (algorithm){
-                        case 2: model = "naivebayes.model";
+                        case 2: model = "nb.model";
                             break;
                         case 3: model = "knn.model";
                             break;
@@ -167,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
                             break;
                         case 1:
 
-                        default: model = "linearregression.model";
+                        default: model = "lr.model";
                             break;
                     }
 
@@ -191,9 +197,7 @@ public class MainActivity extends AppCompatActivity {
         FileInputStream fIn = new FileInputStream(myFile);
         BufferedReader r = new BufferedReader( new InputStreamReader( fIn ) );
 
-        StringBuilder stringBuilder = new StringBuilder();
         String line;
-        String jsonString = null;
         int lineCount = 0;
         int limit;
         int count = 0;
@@ -223,10 +227,8 @@ public class MainActivity extends AppCompatActivity {
             while (count <= limit ) {
                 line = r.readLine();
                 pw.println(line);
-                stringBuilder.append( line );
                 count++;
             }
-            jsonString = stringBuilder.toString();
         }
         catch (Exception e) {
             Log.e( "GetJsonFromResource", Log.getStackTraceString( e ) );
@@ -235,7 +237,7 @@ public class MainActivity extends AppCompatActivity {
         pw.close();
         fOut.close();
 
-        return jsonString;
+        return "success";
 
     }
 
@@ -303,72 +305,158 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /*
-    public static String POST(String url, String trainData){
-        InputStream inputStream = null;
-        String result = "";
-        try {
+    public class UploadTask extends AsyncTask<String, String, String> {
+        private Context context;
 
-            // 1. create HttpClient
-            HttpClient httpclient = new DefaultHttpClient();
-
-            // 2. make POST request to the given URL
-            HttpPost httpPost = new HttpPost(url);
-
-            String json = "";
-
-            // 3. build jsonObject
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.accumulate("name", person.getName());
-            jsonObject.accumulate("country", person.getCountry());
-            jsonObject.accumulate("twitter", person.getTwitter());
-
-            // 4. convert JSONObject to JSON to String
-            json = jsonObject.toString();
-
-            // ** Alternative way to convert Person object to JSON string usin Jackson Lib
-            // ObjectMapper mapper = new ObjectMapper();
-            // json = mapper.writeValueAsString(person);
-
-            // 5. set json to StringEntity
-            StringEntity se = new StringEntity(json);
-
-            // 6. set httpPost Entity
-            httpPost.setEntity(se);
-
-            // 7. Set some headers to inform server about the type of the content
-            httpPost.setHeader("Accept", "application/json");
-            httpPost.setHeader("Content-type", "application/json");
-
-            // 8. Execute POST request to the given URL
-            HttpResponse httpResponse = httpclient.execute(httpPost);
-
-            // 9. receive response as inputStream
-            inputStream = httpResponse.getEntity().getContent();
-
-            // 10. convert inputstream to string
-            if(inputStream != null)
-                result = convertInputStreamToString(inputStream);
-            else
-                result = "Did not work!";
-
-        } catch (Exception e) {
-            Log.d("InputStream", e.getLocalizedMessage());
+        public UploadTask(Context context) {
+            this.context = context;
         }
 
-        // 11. return result
-        return result;
-    }
-
-    private class HttpAsyncTask extends AsyncTask<String, void, String>{
         @Override
-        protected String doInBackground(String... urls) {
-            return POST(urls[0],jsonTrainData);;
+        protected String doInBackground(String... sUrl) {
+            InputStream input = null;
+            OutputStream output = null;
+            HttpURLConnection conn = null;
+            int serverResponseCode = 0;
+
+
+            try {
+
+                DataOutputStream dos = null;
+                String lineEnd = "\r\n";
+                String twoHyphens = "--";
+                String boundary = "*****";
+                int bytesRead, bytesAvailable, bufferSize;
+                byte[] buffer;
+                int maxBufferSize = 1 * 1024 * 1024;
+                File sourceFile = new File(uploadFilePath + trainFile);
+                Log.i("File Uri ", sUrl[0]);
+                Log.i("File ", sourceFile.toString());
+
+                if (!sourceFile.isFile()) {
+
+                    Log.e("Upload File :", uploadFilePath + trainFile + " does not exist");
+
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            Toast.makeText(getApplicationContext(),
+                                    "Upload File :" + uploadFilePath + trainFile + " does not exist", Toast.LENGTH_LONG).show();
+                        }
+                    });
+
+                    return "Source File not exist";
+
+                } else {
+                    try {
+
+                        FileInputStream fileInputStream = new FileInputStream(sourceFile);
+
+
+                        URL url = new URL(upLoadURL);
+                        conn = (HttpURLConnection) url.openConnection();
+                        conn.setDoInput(true);
+                        conn.setDoOutput(true);
+                        conn.setUseCaches(false);
+                        conn.setRequestMethod("POST");
+                        conn.setRequestProperty("Connection", "Keep-Alive");
+                        conn.setRequestProperty("ENCTYPE", "multipart/form-data");
+                        conn.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
+                        conn.setRequestProperty("uploaded_file", uploadFilePath + "" + trainFile);
+
+
+                        dos = new DataOutputStream(conn.getOutputStream());
+
+                        dos.writeBytes(twoHyphens + boundary + lineEnd);
+                        dos.writeBytes("Content-Disposition: form-data; name=" + "uploaded_file;filename="
+                                + uploadFilePath + "" + trainFile + "" + lineEnd);
+
+                        dos.writeBytes(lineEnd);
+
+                        bytesAvailable = fileInputStream.available();
+
+                        bufferSize = Math.min(bytesAvailable, maxBufferSize);
+                        buffer = new byte[bufferSize];
+
+                        bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+
+                        while (bytesRead > 0) {
+
+                            dos.write(buffer, 0, bufferSize);
+                            bytesAvailable = fileInputStream.available();
+                            bufferSize = Math.min(bytesAvailable, maxBufferSize);
+                            bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+
+                        }
+
+                        dos.writeBytes(lineEnd);
+                        dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
+
+                        serverResponseCode = conn.getResponseCode();
+                        String serverResponseMessage = conn.getResponseMessage();
+
+                        conn.connect();
+                        serverResponseCode = conn.getResponseCode();
+                        if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
+                            return "Server returned HTTP " + conn.getResponseCode()
+                                    + " " + conn.getResponseMessage();
+                        }
+
+
+                        Log.i("Upload File", "HTTP Response is : "
+                                + serverResponseMessage + ": " + serverResponseCode);
+
+                        if (serverResponseCode == 200) {
+
+                            runOnUiThread(new Runnable() {
+                                              public void run() {
+                                                  Toast.makeText(getApplicationContext(),
+                                                          "File Upload Completed", Toast.LENGTH_LONG).show();
+                                              }
+                                          }
+
+                            );
+                        }
+
+                        fileInputStream.close();
+                        dos.flush();
+                        dos.close();
+
+                    } catch (MalformedURLException ex) {
+
+                        ex.printStackTrace();
+                        String temp = "value displayed";
+                        Log.i("Response Code:" + serverResponseCode, temp);
+                        runOnUiThread(new Runnable() {
+                            public void run() {
+                                Toast.makeText(getApplicationContext(),
+                                        "MalformedURLException Exception : check script url.", Toast.LENGTH_LONG).show();
+                            }
+                        });
+
+                        Log.e("Upload file to server", "error: " + ex.getMessage(), ex);
+                    } catch (Exception e) {
+
+                        e.printStackTrace();
+                        String temp = "value displayed";
+                        Log.i("Response Code:" + serverResponseCode, temp);
+                        runOnUiThread(new Runnable() {
+                            public void run() {
+                                Toast.makeText(getApplicationContext(),
+                                        "Got Exception : see logcat", Toast.LENGTH_LONG).show();
+                            }
+                        });
+                        Log.e("Upload file to server", "Exception : "
+                                + e.getMessage(), e);
+                    }
+                    return ("String response code:" + serverResponseCode);
+
+                }
+            } catch (Exception ex) {
+            }
+            return "success";
         }
-        @Override
-        protected void onPostExecute(String result) {
-            Toast.makeText(getBaseContext(), "Data Sent for Training!", Toast.LENGTH_LONG).show();
-        }
+
+
     }
 
 
