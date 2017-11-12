@@ -3,11 +3,38 @@
 
     <item
         is-multidex="true"
+        jar="/Users/siddPrakash/.android/build-cache/129564c64fa6edfacb9450cc3a73ca465ff4bb2a/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="c4f45092eee6cdf1a5dbd597b2b6819be652ce2e">
+        <dex dex="/Users/siddPrakash/MLBenchmarkGroup26/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_34c734b62770d39406f44bd7d72b2394ca6b16d5/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/siddPrakash/.android/build-cache/6fa2134f65cd4b4c749479a9373bb7518add2720/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="cddcd0fb93bc70e27325f2f715b2710332004ebb">
+        <dex dex="/Users/siddPrakash/MLBenchmarkGroup26/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_378de77d1b3ac96470bdb4899a29c59f6fe3a4dd/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/siddPrakash/.android/build-cache/35931563302f6218f7853c22d17fcd2727d3bbee/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="6a022bf00ccd0948a8180c505e8e458bbddd43a6">
+        <dex dex="/Users/siddPrakash/MLBenchmarkGroup26/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_7f5995dded78ca99b4c7853b84f4ced080bf787d/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/Users/siddPrakash/MLBenchmarkGroup26/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="26.0.1"
-        sha1="76b8c245757ece752265a3e2ed43522f60a58085">
+        sha1="2f3ef5fb95676b86fddce2e3f251799161371fe8">
         <dex dex="/Users/siddPrakash/MLBenchmarkGroup26/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_c015e05fd75049305f06f8d3ecf48e01205a8efe/classes.dex" />
     </item>
     <item

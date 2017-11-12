@@ -10,4 +10,8 @@
         <item>k-Nearest Neighbour</item>
         <item>Support Vector Machine</item>
     </string-array>
+    <string name="title_activity_testing_data">testingData</string>
+    <string name="title_activity_training_data">trainingData</string>
+    <string name="back">Back</string>
+    <string name="log">View Logfile</string>
 </resources>

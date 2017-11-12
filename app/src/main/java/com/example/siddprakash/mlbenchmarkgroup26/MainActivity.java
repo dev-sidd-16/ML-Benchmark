@@ -49,6 +49,7 @@ import weka.classifiers.Evaluation;
 import weka.classifiers.functions.SMO;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSource;
+import weka.core.pmml.jaxbbindings.EventValues;
 import weka.gui.*;
 
 import static com.example.siddprakash.mlbenchmarkgroup26.R.string.test;
@@ -144,6 +145,8 @@ public class MainActivity extends AppCompatActivity {
                 UploadTask uploadTask = new UploadTask(MainActivity.this);
                 uploadTask.execute(uploadFilePath + trainFile);
 
+                //TODO Set listener for downloading the model after training data is sent, meanwhile run wait animation on UI thread
+
             }
         });
 
@@ -154,6 +157,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d(TAG,"Testing Button Clicked");
+
                 try {
 
                     Instances train = getDataFromResource(dataSplit, "Train");
@@ -179,23 +183,21 @@ public class MainActivity extends AppCompatActivity {
 
 //                    Classifier cls = (Classifier) weka.core.SerializationHelper.read(Environment.getExternalStorageDirectory()+"/Android/data/MLBenchmark/"+model);
                     Classifier cls = (Classifier) weka.core.SerializationHelper.read(Environment.getExternalStorageDirectory()+"/Android/data/MLBenchmark/abc.model");
+                    long trainStart = System.currentTimeMillis();
                     Evaluation eval = new Evaluation(train);
+                    long trainEnd = System.currentTimeMillis();
+                    long tDelta = trainEnd - trainStart;
+                    double elapsedSeconds = tDelta;
+
                     eval.evaluateModel(cls, test);
 
-                    System.out.println(eval.toSummaryString("\nResults\n======\n", false));
-
-                    double trr = eval.trueNegativeRate(0) * 100;
-                    double tar = eval.truePositiveRate(0) * 100;
-                    double frr = eval.falseNegativeRate(0) * 100;
-                    double far = eval.falsePositiveRate(0) * 100;
-                    double hter = (frr + far) / 2.0;
-
-                    System.out.println("True Accept Rate (TAR): "+tar+" %");
-                    System.out.println("True Reject Rate (TAR): "+trr+" %");
-                    System.out.println("False Accept Rate (TAR): "+far+" %");
-                    System.out.println("False Reject Rate (TAR): "+frr+" %");
-                    System.out.println("HTER: "+hter+" %");
-
+                    Intent intent = new Intent();
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("EvalModel", eval);
+                    bundle.putSerializable("TestTime", elapsedSeconds);
+                    intent.putExtras(bundle);
+                    intent.setClass(MainActivity.this, testingData.class);
+                    startActivity(intent);
 
                 } catch (Exception e) {
                     e.printStackTrace();
