@@ -18,6 +18,7 @@ public class testingData extends AppCompatActivity {
     private Evaluation eval;
     private Button backButton;
     private double testTimeElapsed;
+    private double trainTimeElapsed;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +28,7 @@ public class testingData extends AppCompatActivity {
         if (bundle != null) {
             eval = (Evaluation) bundle.getSerializable("EvalModel");
             testTimeElapsed = (double) bundle.getSerializable("TestTime");
+            trainTimeElapsed = (double) bundle.getSerializable("TrainTime");
         }
 
         System.out.println(eval.toSummaryString("\nResults\n======\n", false));
@@ -51,6 +53,9 @@ public class testingData extends AppCompatActivity {
 
         TextView textViewHTER = (TextView) findViewById(R.id.hter);
         textViewHTER.setText(Double.toString(hter)+" %");
+
+        TextView textViewTrainTime = (TextView) findViewById(R.id.train_time);
+        textViewTrainTime.setText(Double.toString(trainTimeElapsed)+" ms.");
 
         TextView textViewTestTime = (TextView) findViewById(R.id.test_time);
         textViewTestTime.setText(Double.toString(testTimeElapsed)+" ms.");

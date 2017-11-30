@@ -2,6 +2,7 @@ package com.example.siddprakash.mlbenchmarkgroup26;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
@@ -61,9 +62,15 @@ public class MainActivity extends AppCompatActivity {
 
     private float dataSplit = 0.5f;
     private int algorithm = 0;
+    private int svmK = 0;
+    private String model = "lr.model";
+    private boolean downloaded = false;
+    private double elapsedTrainSeconds = 0.0;
+    private double elapsedSeconds = 0.0;
 
     private EditText dSplit;
     private Spinner algo;
+    private Spinner svmKernel;
     private Button saveParams;
     private Button trainButton;
     private Button testButton;
@@ -74,8 +81,8 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String uploadFilePath = Environment.getExternalStorageDirectory() + "/Android/Data/MLBenchmark/";
     private static final String downloadFilePath = Environment.getExternalStorageDirectory() + "/Android/Data/MLBenchmark/";
-    public static final String upLoadURL = "http://10.218.110.136/CSE535Fall17Folder/UploadToServer.php";
-    public static final String downloadUrl = "http://10.218.110.136/CSE535Fall17Folder/";
+    public static final String upLoadURL = "/Android/Data/MLBenchmarkTest/";
+    public static final String downloadUrl = "http://ec2-54-219-146-0.us-west-1.compute.amazonaws.com:8080/train/SVM";
 
 
 
@@ -94,9 +101,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Example of a call to a native method
-        TextView tv = (TextView) findViewById(R.id.datasetName);
-        tv.setText(stringFromJNI());
 
         // Get the split percentage value from text input
         dSplit = (EditText) findViewById(R.id.DSplit);
@@ -115,16 +119,29 @@ public class MainActivity extends AppCompatActivity {
         algo = (Spinner) findViewById(R.id.ML_spinner);
         algo.setOnItemSelectedListener(new SpinnerActivity());
 
+        svmKernel = (Spinner) findViewById(R.id.SVM_spinner);
+        svmKernel.setOnItemSelectedListener(new SpinnerActivity());
+
         // Read and Create the training - testing split of the data set file
 
         saveParams = (Button) findViewById(R.id.algoButton);
-        trainFile = "trainFile"+algorithm+".csv";
+        trainFile = "trainFile"+algorithm+".data";
 
         saveParams.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG,"Save Params Button Clicked");
                try {
+                   TextView tv = (TextView) findViewById(R.id.modelName);
+                   File modelFile = new File(downloadFilePath+model);
+                   boolean success = true;
+                   if (!modelFile.exists()) {
+                       tv.setText("No");
+                   }
+                   else{
+                       tv.setText("Yes");
+                   }
+
                    trainData = createPartition(dataSplit, trainFile);
                    System.out.println(trainData);
                    Toast.makeText(MainActivity.this, "Split Dataset Created", Toast.LENGTH_LONG).show();
@@ -142,10 +159,36 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d(TAG,"Training Button Clicked");
-                UploadTask uploadTask = new UploadTask(MainActivity.this);
-                uploadTask.execute(uploadFilePath + trainFile);
+
+                if (!downloaded) {
+                    final ProgressDialog pDialog = ProgressDialog.show(MainActivity.this, "Training model", "Wait while training...");
+                    new Thread() {
+                        public void run() {
+                            try {
+                                sleep(2000);
+                            } catch (Exception e) {
+                            }
+                            pDialog.dismiss();
+                        }
+                    }.start();
+                }
+
+                long trainStart = System.currentTimeMillis();
+
+//                UploadTask uploadTask = new UploadTask(MainActivity.this);
+//                uploadTask.execute(uploadFilePath + trainFile);
+
+                DownloadTask downloadTask = new DownloadTask(MainActivity.this);
+                downloadTask.execute(downloadUrl + model);
+                downloaded = true;
+
+                long trainEnd = System.currentTimeMillis();
+                long trainDelta = trainEnd - trainStart;
+                elapsedTrainSeconds = trainDelta;
 
                 //TODO Set listener for downloading the model after training data is sent, meanwhile run wait animation on UI thread
+
+
 
             }
         });
@@ -163,41 +206,31 @@ public class MainActivity extends AppCompatActivity {
                     Instances train = getDataFromResource(dataSplit, "Train");
                     Instances test = getDataFromResource(dataSplit, "Test");
 
-
-                    //SMO classifier = new SMO();
-                    //classifier.buildClassifier(train);
-                    //weka.core.SerializationHelper.write("abc.model", classifier);
-                    String model;
-                    switch (algorithm){
-                        case 2: model = "nb.model";
-                            break;
-                        case 3: model = "knn.model";
-                            break;
-                        case 4: model = "svm.model";
-                            break;
-                        case 1:
-
-                        default: model = "lr.model";
-                            break;
+                    File modelFile = new File(downloadFilePath+model);
+                    if (!modelFile.exists()) {
+                        Toast.makeText(MainActivity.this, "Model file does not exist! PLease train model before testing!", Toast.LENGTH_LONG).show();
                     }
+                    else {
 
-//                    Classifier cls = (Classifier) weka.core.SerializationHelper.read(Environment.getExternalStorageDirectory()+"/Android/data/MLBenchmark/"+model);
-                    Classifier cls = (Classifier) weka.core.SerializationHelper.read(Environment.getExternalStorageDirectory()+"/Android/data/MLBenchmark/abc.model");
-                    long trainStart = System.currentTimeMillis();
-                    Evaluation eval = new Evaluation(train);
-                    long trainEnd = System.currentTimeMillis();
-                    long tDelta = trainEnd - trainStart;
-                    double elapsedSeconds = tDelta;
+                        Classifier cls = (Classifier) weka.core.SerializationHelper.read(Environment.getExternalStorageDirectory() + "/Android/data/MLBenchmark/" + model);
+//                    Classifier cls = (Classifier) weka.core.SerializationHelper.read(Environment.getExternalStorageDirectory()+"/Android/data/MLBenchmarkTest/abc.model");
+                        long testStart = System.currentTimeMillis();
+                        Evaluation eval = new Evaluation(train);
+                        long testEnd = System.currentTimeMillis();
+                        long tDelta = testEnd - testStart;
+                        elapsedSeconds = tDelta;
 
-                    eval.evaluateModel(cls, test);
+                        eval.evaluateModel(cls, test);
 
-                    Intent intent = new Intent();
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("EvalModel", eval);
-                    bundle.putSerializable("TestTime", elapsedSeconds);
-                    intent.putExtras(bundle);
-                    intent.setClass(MainActivity.this, testingData.class);
-                    startActivity(intent);
+                        Intent intent = new Intent();
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("EvalModel", eval);
+                        bundle.putSerializable("TestTime", elapsedSeconds);
+                        bundle.putSerializable("TrainTime", elapsedTrainSeconds);
+                        intent.putExtras(bundle);
+                        intent.setClass(MainActivity.this, testingData.class);
+                        startActivity(intent);
+                    }
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -292,28 +325,49 @@ public class MainActivity extends AppCompatActivity {
 
             switch (parent.getItemAtPosition(pos).toString()){
                 case "Logistic Regression": algorithm = 1;
+                    model = "lr.model";
                     Toast.makeText(parent.getContext(),
                             "ML Algorithm selected : " + parent.getItemAtPosition(pos).toString(),
                             Toast.LENGTH_SHORT).show();
                     break;
                 case "Náive Bayes Classifier": algorithm = 2;
+                    model = "nb.model";
                     Toast.makeText(parent.getContext(),
                             "ML Algorithm selected : " + parent.getItemAtPosition(pos).toString(),
                             Toast.LENGTH_SHORT).show();
                     break;
                 case "k-Nearest Neighbour": algorithm = 3;
+                    model = "knn.model";
                     Toast.makeText(parent.getContext(),
                             "ML Algorithm selected : " + parent.getItemAtPosition(pos).toString(),
                             Toast.LENGTH_SHORT).show();
                     break;
                 case "Support Vector Machine": algorithm = 4;
+                    model = "abc.model";
                     Toast.makeText(parent.getContext(),
                             "ML Algorithm selected : " + parent.getItemAtPosition(pos).toString(),
+                            Toast.LENGTH_SHORT).show();
+                    break;
+                case "Linear": svmK = 0;
+                    Toast.makeText(parent.getContext(),
+                            "SVM Kernel selected : " + parent.getItemAtPosition(pos).toString(),
+                            Toast.LENGTH_SHORT).show();
+                    break;
+                case "RBF": svmK = 1;
+                    Toast.makeText(parent.getContext(),
+                            "SVM Kernel selected : " + parent.getItemAtPosition(pos).toString(),
+                            Toast.LENGTH_SHORT).show();
+                    break;
+                case "Poly": svmK = 2;
+                    Toast.makeText(parent.getContext(),
+                            "SVM Kernel selected : " + parent.getItemAtPosition(pos).toString(),
                             Toast.LENGTH_SHORT).show();
                     break;
                 default: Toast.makeText(MainActivity.this, "None", Toast.LENGTH_LONG).show();
             }
             Log.d(TAG, "Algorithm selected: "+algorithm);
+            Log.d(TAG, "SVM selected: "+svmK);
+
         }
 
         public void onNothingSelected(AdapterView<?> arg0) {
@@ -473,6 +527,89 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    private class DownloadTask extends AsyncTask<String, Integer, String> {
+
+        private Context context;
+
+        public DownloadTask(Context context) {
+            this.context = context;
+        }
+
+        @Override
+        protected String doInBackground(String... sUrl) {
+
+            InputStream input = null;
+            OutputStream output = null;
+            HttpURLConnection connection = null;
+
+            try {
+                URL url = new URL(sUrl[0]);
+                connection = (HttpURLConnection) url.openConnection();
+
+                input = connection.getInputStream();
+
+                File folder = new File(downloadFilePath);
+                boolean success = true;
+                if (!folder.exists()) {
+                    success = folder.mkdir();
+                }
+
+                if (success)
+                    output = new FileOutputStream(downloadFilePath + model);
+                else {
+                    Toast.makeText(getApplicationContext(),
+                            "Can not create download directory" + downloadFilePath, Toast.LENGTH_LONG).show();
+                }
+
+
+                byte data[] = new byte[4096];
+                long total = 0;
+                int count;
+                connection.connect();
+                while ((count = input.read(data)) != -1) {
+
+                    if (isCancelled()) {
+                        input.close();
+                        return null;
+                    }
+                    total += count;
+
+                    output.write(data, 0, count);
+
+                }
+                System.out.print("Done");
+            } catch (Exception e) {
+                return e.toString();
+            } finally {
+                try {
+                    if (output != null) {
+                        new Thread(new Runnable() {
+                            public void run() {
+                                runOnUiThread(new Runnable() {
+                                    public void run() {
+                                        Toast.makeText(getApplicationContext(),
+                                                "Download Completed", Toast.LENGTH_LONG).show();
+                                    }
+                                });
+
+                            }
+                        }).start();
+                        output.close();
+                    }
+                    if (input != null)
+                        input.close();
+                } catch (IOException ignored) {
+                }
+
+                if (connection != null)
+                    connection.disconnect();
+            }
+
+            return null;
+
+        }
     }
 
 

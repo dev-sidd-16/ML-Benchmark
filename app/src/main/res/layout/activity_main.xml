@@ -65,6 +65,140 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:layout_weight=".05"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight=".05"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/trainParams"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Training Parameters:"
+                    android:textSize="20sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight=".05"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/knnParams"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".2"
+                    android:gravity="left"
+                    android:text="Clusters (k) in k-NN (1-5):"
+                    android:textSize="20sp"/>
+                <EditText
+                    android:id="@+id/kNN"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:gravity="right"
+                    android:hint="5"
+                    android:inputType="number"
+                    android:textSize="16sp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight=".05"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/svmParams1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".2"
+                    android:gravity="left"
+                    android:text="SVM Params 1:"
+                    android:textSize="20sp"/>
+                <EditText
+                    android:id="@+id/svm1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:gravity="right"
+                    android:hint="0"
+                    android:inputType="number"
+                    android:textSize="16sp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight=".05"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/svmParams2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".2"
+                    android:gravity="left"
+                    android:text="SVM Params 2:"
+                    android:textSize="20sp"/>
+                <EditText
+                    android:id="@+id/svm2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:gravity="right"
+                    android:hint="0"
+                    android:inputType="number"
+                    android:textSize="16sp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight=".05"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/svmParams3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".4"
+                    android:gravity="left"
+                    android:text="SVM Kernel:"
+                    android:textSize="20sp"/>
+                <Spinner
+                    android:id="@+id/SVM_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".6"
+                    android:gravity="right"
+                    android:prompt="@string/svm_prompt"
+                    android:entries="@array/svm_arrays"
+                    />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
             android:orientation="horizontal">
             <Button
                 android:id="@+id/algoButton"
@@ -106,76 +240,39 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:gravity="center"
-            android:layout_weight=".05"
-            android:orientation="horizontal">
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:orientation="vertical">-->
 
-            <TextView
-                android:id="@+id/datasetSelect"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight=".5"
-                android:gravity="right|center"
-                android:text="Dataset Selected :"
-                android:textSize="20sp"/>
-
-            <TextView
-                android:id="@+id/datasetName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight=".5"
-                android:gravity="left|center"
-                android:text=" Default"
-                android:textSize="20sp"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight=".5"
-                android:gravity="center"
-                android:text="Extra Credits"
-                android:textSize="20sp"/>
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:gravity="center"-->
+                <!--android:text="Extra Credits"-->
+                <!--android:textSize="20sp"/>-->
 
 
-            <RadioGroup
-                android:id="@+id/Extra"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <RadioButton
-                    android:id="@+id/Multithread"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight=".5"
-                    android:checked="false"
-                    android:text="Multi-threaded Processing"
-                    android:textSize="10sp" />
+            <!--<RadioGroup-->
+                <!--android:id="@+id/Extra"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="horizontal">-->
+                <!--<RadioButton-->
+                    <!--android:id="@+id/Multithread"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:checked="false"-->
+                    <!--android:text="Multi-threaded Processing"-->
+                    <!--android:textSize="10sp" />-->
 
-                <RadioButton
-                    android:id="@+id/GPU"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight=".5"
-                    android:checked="false"
-                    android:text="GPU Implementation"
-                    android:textSize="11sp" />
-            </RadioGroup>
+            <!--</RadioGroup>-->
 
-        </LinearLayout>
+        <!--</LinearLayout>-->
 
         <LinearLayout
             android:layout_width="match_parent"
