@@ -82,7 +82,8 @@ public class MainActivity extends AppCompatActivity {
     private static final String uploadFilePath = Environment.getExternalStorageDirectory() + "/Android/Data/MLBenchmark/";
     private static final String downloadFilePath = Environment.getExternalStorageDirectory() + "/Android/Data/MLBenchmark/";
     public static final String upLoadURL = "/Android/Data/MLBenchmarkTest/";
-    public static final String downloadUrl = "http://ec2-54-219-146-0.us-west-1.compute.amazonaws.com:8080/train/SVM";
+//    public static final String downloadUrl = "http://ec2-54-219-146-0.us-west-1.compute.amazonaws.com:8080/train/SVM";
+    public static final String downloadUrl = "http://10.152.114.187:8080/train/SVM";
 
 
 
@@ -97,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+//        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -134,7 +135,6 @@ public class MainActivity extends AppCompatActivity {
                try {
                    TextView tv = (TextView) findViewById(R.id.modelName);
                    File modelFile = new File(downloadFilePath+model);
-                   boolean success = true;
                    if (!modelFile.exists()) {
                        tv.setText("No");
                    }
@@ -165,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
                     new Thread() {
                         public void run() {
                             try {
-                                sleep(2000);
+                                sleep(1000);
                             } catch (Exception e) {
                             }
                             pDialog.dismiss();
@@ -185,6 +185,16 @@ public class MainActivity extends AppCompatActivity {
                 long trainEnd = System.currentTimeMillis();
                 long trainDelta = trainEnd - trainStart;
                 elapsedTrainSeconds = trainDelta;
+
+                TextView tv = (TextView) findViewById(R.id.modelName);
+                File modelFile = new File(downloadFilePath+model);
+
+                if (!modelFile.exists()) {
+                    tv.setText("No");
+                }
+                else{
+                    tv.setText("Yes");
+                }
 
                 //TODO Set listener for downloading the model after training data is sent, meanwhile run wait animation on UI thread
 
@@ -208,7 +218,7 @@ public class MainActivity extends AppCompatActivity {
 
                     File modelFile = new File(downloadFilePath+model);
                     if (!modelFile.exists()) {
-                        Toast.makeText(MainActivity.this, "Model file does not exist! PLease train model before testing!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, "Model file does not exist! Please train model before testing!", Toast.LENGTH_LONG).show();
                     }
                     else {
 
@@ -343,7 +353,7 @@ public class MainActivity extends AppCompatActivity {
                             Toast.LENGTH_SHORT).show();
                     break;
                 case "Support Vector Machine": algorithm = 4;
-                    model = "abc.model";
+                    model = "svm.model";
                     Toast.makeText(parent.getContext(),
                             "ML Algorithm selected : " + parent.getItemAtPosition(pos).toString(),
                             Toast.LENGTH_SHORT).show();
