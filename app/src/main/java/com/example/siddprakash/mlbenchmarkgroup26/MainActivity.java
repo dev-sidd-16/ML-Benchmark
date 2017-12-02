@@ -5,9 +5,13 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.*;
+import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -79,6 +83,8 @@ public class MainActivity extends AppCompatActivity {
     private String trainData;
     private String trainFile;
 
+    private String appFolderPath = Environment.getExternalStorageDirectory() + "/Android/Data/MLBenchmark/";
+
     private static final String uploadFilePath = Environment.getExternalStorageDirectory() + "/Android/Data/MLBenchmark/";
     private static final String downloadFilePath = Environment.getExternalStorageDirectory() + "/Android/Data/MLBenchmark/";
     public static final String upLoadURL = "/Android/Data/MLBenchmarkTest/";
@@ -102,6 +108,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        int permission = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            // We don't have permission so prompt the user
+            int ACCESS_EXTERNAL_STORAGE_STATE = 1;
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    ACCESS_EXTERNAL_STORAGE_STATE);
+        }
+
 
         // Get the split percentage value from text input
         dSplit = (EditText) findViewById(R.id.DSplit);
@@ -109,7 +125,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                // TODO Auto-generated method stub
                 dataSplit = Float.valueOf(v.getText().toString());
                 Log.d(TAG, "Data Split= "+dataSplit*100+"%");
                 return false;
@@ -126,12 +141,15 @@ public class MainActivity extends AppCompatActivity {
         // Read and Create the training - testing split of the data set file
 
         saveParams = (Button) findViewById(R.id.algoButton);
+        // TODO: Need to check the format of traning file we need to send to server
         trainFile = "trainFile"+algorithm+".data";
 
         saveParams.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG,"Save Params Button Clicked");
+                CreateAppFolderIfNeed();
+                copyAssetsDataIfNeed();
                try {
                    TextView tv = (TextView) findViewById(R.id.modelName);
                    File modelFile = new File(downloadFilePath+model);
@@ -160,6 +178,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d(TAG,"Training Button Clicked");
 
+                //TODO: Need to change the progress update, DEPRECATED
+                //TODO Set listener for downloading the model after training data is sent, meanwhile run wait animation on UI thread
                 if (!downloaded) {
                     final ProgressDialog pDialog = ProgressDialog.show(MainActivity.this, "Training model", "Wait while training...");
                     new Thread() {
@@ -195,10 +215,6 @@ public class MainActivity extends AppCompatActivity {
                 else{
                     tv.setText("Yes");
                 }
-
-                //TODO Set listener for downloading the model after training data is sent, meanwhile run wait animation on UI thread
-
-
 
             }
         });
@@ -248,6 +264,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_ID_WRITE_PERMISSION: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // Write to the storage (ex: call appendByteBuffer(byte[] data) here)
+
+                } else {
+                    Toast.makeText(getApplicationContext(), "Please grant permission.", Toast.LENGTH_LONG).show();
+                }
+                break;
+            }
+        }
     }
 
     private String createPartition(float dataSplit, String fName) throws IOException {
@@ -622,6 +654,68 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void CreateAppFolderIfNeed(){
+        Log.d(TAG, appFolderPath);
+        File folder = new File(appFolderPath);
+        boolean success = true;
+        if (!folder.exists()) {
+            success = folder.mkdirs();
+            if(!success)
+                Log.d(TAG,"App folder does not exist");
+            else
+                Log.d(TAG,"App folder created!");
+        } else {
+            Log.d(TAG,"App folder exists");
+        }
+    }
+
+    private void copyFile(InputStream in, OutputStream out) throws IOException {
+        byte[] buffer = new byte[1024];
+        int read;
+        while((read = in.read(buffer)) != -1){
+            out.write(buffer, 0, read);
+        }
+    }
+
+    private boolean copyAsset(AssetManager assetManager, String fromAssetPath, String toPath) {
+        InputStream in = null;
+        OutputStream out = null;
+        try {
+            assetManager = getAssets();
+            in = assetManager.open(fromAssetPath);
+            new File(toPath).createNewFile();
+            out = new FileOutputStream(toPath);
+            copyFile(in, out);
+            in.close();
+            in = null;
+            out.flush();
+            out.close();
+            out = null;
+            return true;
+        } catch(Exception e) {
+            e.printStackTrace();
+            Log.e(TAG, "[ERROR]: copyAsset: unable to copy file = "+fromAssetPath);
+            return false;
+        }
+    }
+
+    private void copyAssetsDataIfNeed(){
+        String assetsToCopy[] = {"breast-cancer-wisconsin.data", "breast-cancer-wisconsin.txt"};
+        for(int i=0; i<assetsToCopy.length; i++){
+            String from = assetsToCopy[i];
+            String to = appFolderPath+from;
+
+            // 1. check if file exist
+            File file = new File(to);
+            if(file.exists()){
+                Log.d(TAG, "copyAssetsDataIfNeed: file exist, no need to copy:"+from);
+            } else {
+                // do copy
+                boolean copyResult = copyAsset(getAssets(), from, to);
+                Log.d(TAG, "copyAssetsDataIfNeed: copy result = " + copyResult + " of file = " + from);
+            }
+        }
+    }
 
     /**
      * A native method that is implemented by the 'native-lib' native library,
