@@ -14,6 +14,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.ButtonBarLayout;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -78,7 +79,10 @@ public class MainActivity extends AppCompatActivity {
     private Button saveParams;
     private Button trainButton;
     private Button testButton;
-
+    private TextView knnParam;
+    private TextView svmParam3;
+    private EditText knn;
+    boolean begin = true;
     private Context context;
     private String trainData;
     private String trainFile;
@@ -118,7 +122,9 @@ public class MainActivity extends AppCompatActivity {
                     ACCESS_EXTERNAL_STORAGE_STATE);
         }
 
-
+        knn = (EditText) findViewById(R.id.kNN);
+        knnParam = (TextView) findViewById(R.id.knnParams);
+        svmParam3 = (TextView) findViewById(R.id.svmParams3);
         // Get the split percentage value from text input
         dSplit = (EditText) findViewById(R.id.DSplit);
         dSplit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -168,7 +174,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
 
         // Training Code
         // Send the data set file to server
@@ -365,45 +370,79 @@ public class MainActivity extends AppCompatActivity {
             // An item was selected. You can retrieve the selected item using
             // parent.getItemAtPosition(pos)
 
+            knn.setVisibility(View.INVISIBLE);
+            knnParam.setVisibility(View.INVISIBLE);
+            svmKernel.setVisibility(View.INVISIBLE);
+            svmParam3.setVisibility(View.INVISIBLE);
             switch (parent.getItemAtPosition(pos).toString()){
                 case "Logistic Regression": algorithm = 1;
                     model = "lr.model";
                     Toast.makeText(parent.getContext(),
                             "ML Algorithm selected : " + parent.getItemAtPosition(pos).toString(),
                             Toast.LENGTH_SHORT).show();
+                    // get knn param id
+                    knn.setVisibility(View.INVISIBLE);
+                    knnParam.setVisibility(View.INVISIBLE);
+                    svmParam3.setVisibility(View.INVISIBLE);
+                    svmKernel.setVisibility(View.INVISIBLE);
                     break;
                 case "Náive Bayes Classifier": algorithm = 2;
                     model = "nb.model";
                     Toast.makeText(parent.getContext(),
                             "ML Algorithm selected : " + parent.getItemAtPosition(pos).toString(),
                             Toast.LENGTH_SHORT).show();
+                    knn.setVisibility(View.INVISIBLE);
+                    knnParam.setVisibility(View.INVISIBLE);
+                    svmParam3.setVisibility(View.INVISIBLE);
+                    svmKernel.setVisibility(View.INVISIBLE);
                     break;
                 case "k-Nearest Neighbour": algorithm = 3;
                     model = "knn.model";
                     Toast.makeText(parent.getContext(),
                             "ML Algorithm selected : " + parent.getItemAtPosition(pos).toString(),
                             Toast.LENGTH_SHORT).show();
+                    knn.setVisibility(View.VISIBLE);
+                    knnParam.setVisibility(View.VISIBLE);
+                    svmParam3.setVisibility(View.INVISIBLE);
+                    svmKernel.setVisibility(View.INVISIBLE);
                     break;
                 case "Support Vector Machine": algorithm = 4;
                     model = "svm.model";
                     Toast.makeText(parent.getContext(),
                             "ML Algorithm selected : " + parent.getItemAtPosition(pos).toString(),
                             Toast.LENGTH_SHORT).show();
+                    knn.setVisibility(View.INVISIBLE);
+                    knnParam.setVisibility(View.INVISIBLE);
+                    svmParam3.setVisibility(View.VISIBLE);
+                    svmKernel.setVisibility(View.VISIBLE);
                     break;
                 case "Linear": svmK = 0;
-                    Toast.makeText(parent.getContext(),
-                            "SVM Kernel selected : " + parent.getItemAtPosition(pos).toString(),
-                            Toast.LENGTH_SHORT).show();
+                    if(begin) {
+                        svmParam3.setVisibility(View.INVISIBLE);
+                        svmKernel.setVisibility(View.INVISIBLE);
+                        begin = false;
+                    }
+                    else{
+                        svmParam3.setVisibility(View.VISIBLE);
+                        svmKernel.setVisibility(View.VISIBLE);
+                        Toast.makeText(parent.getContext(),
+                                "SVM Kernel selected : " + parent.getItemAtPosition(pos).toString(),
+                                Toast.LENGTH_SHORT).show();
+                    }
                     break;
                 case "RBF": svmK = 1;
                     Toast.makeText(parent.getContext(),
                             "SVM Kernel selected : " + parent.getItemAtPosition(pos).toString(),
                             Toast.LENGTH_SHORT).show();
+                        svmParam3.setVisibility(View.VISIBLE);
+                        svmKernel.setVisibility(View.VISIBLE);
                     break;
                 case "Poly": svmK = 2;
                     Toast.makeText(parent.getContext(),
                             "SVM Kernel selected : " + parent.getItemAtPosition(pos).toString(),
                             Toast.LENGTH_SHORT).show();
+                        svmParam3.setVisibility(View.VISIBLE);
+                        svmKernel.setVisibility(View.VISIBLE);
                     break;
                 default: Toast.makeText(MainActivity.this, "None", Toast.LENGTH_LONG).show();
             }
