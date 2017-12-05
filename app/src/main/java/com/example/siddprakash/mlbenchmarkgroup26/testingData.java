@@ -19,6 +19,8 @@ public class testingData extends AppCompatActivity {
     private Button backButton;
     private double testTimeElapsed;
     private double trainTimeElapsed;
+    private TextView tv;
+    private String model;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 //        setTheme(R.style.AppTheme);
@@ -27,9 +29,23 @@ public class testingData extends AppCompatActivity {
 
         Bundle bundle = this.getIntent().getExtras();
         if (bundle != null) {
+            model = (String) bundle.getSerializable("Model");
             eval = (Evaluation) bundle.getSerializable("EvalModel");
             testTimeElapsed = (double) bundle.getSerializable("TestTime");
             trainTimeElapsed = (double) bundle.getSerializable("TrainTime");
+        }
+
+        tv = (TextView) findViewById(R.id.tr_label);
+        switch (model){
+            case "LR" : tv.setText("Logistic Regression");
+                break;
+            case "NB" : tv.setText("Naive Bayes");
+                break;
+            case "KNN" : tv.setText("k-Nearest Neighbor");
+                break;
+            case "SVM" : tv.setText("Support Vector Machine");
+                break;
+
         }
 
         System.out.println(eval.toSummaryString("\nResults\n======\n", false));

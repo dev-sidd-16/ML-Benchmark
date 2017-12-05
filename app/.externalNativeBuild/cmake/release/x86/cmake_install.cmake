@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/kanun/Desktop/MCproject/Android/ML-Benchmark/app
+# Install script for directory: /Users/siddPrakash/MLBenchmarkGroup26/app
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/Project")
+  set(CMAKE_INSTALL_PREFIX "/usr/local")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/kanun/Desktop/MCproject/Android/ML-Benchmark/app/.externalNativeBuild/cmake/release/x86/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/siddPrakash/MLBenchmarkGroup26/app/.externalNativeBuild/cmake/release/x86/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

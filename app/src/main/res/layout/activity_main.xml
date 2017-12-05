@@ -48,23 +48,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:orientation="horizontal">
-            <Button
-                android:id="@+id/algoButton"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight=".5"
-                android:layout_marginLeft="100dp"
-                android:layout_marginRight="100dp"
-                android:background="@android:color/darker_gray"
-                android:text="Create Dataset Split" />/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
             android:layout_weight=".02"
             android:orientation="horizontal">
 
@@ -75,6 +58,23 @@
                 android:prompt="@string/ml_prompt"
                 android:entries="@array/ml_arrays"
                 />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/algoButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight=".5"
+                android:layout_marginLeft="100dp"
+                android:layout_marginRight="100dp"
+                android:background="@android:color/darker_gray"
+                android:text="Create Dataset Split" />/>
         </LinearLayout>
 
         <LinearLayout

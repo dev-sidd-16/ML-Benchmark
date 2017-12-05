@@ -40,6 +40,7 @@ import java.net.URL;
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
 import weka.core.Instances;
+import weka.core.pmml.jaxbbindings.False;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -67,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
     private String trainData;
     private String trainFile;
     private String mname = "LR";
+//    private TextView tv;
+//    private File modelFile;
 
     private String appFolderPath = Environment.getExternalStorageDirectory() + "/Android/Data/MLBenchmark/";
 
@@ -103,6 +106,20 @@ public class MainActivity extends AppCompatActivity {
                     ACCESS_EXTERNAL_STORAGE_STATE);
         }
 
+        TextView tv = (TextView) findViewById(R.id.modelName);
+        File modelFile = new File(downloadFilePath+model);
+        System.out.println("file......."+downloadFilePath+model);
+
+        if (!modelFile.exists()) {
+            tv.setText("No");
+            System.out.println("Does not exists..............");
+        }
+        else{
+            modelFile.delete();
+            tv.setText("No");
+        }
+
+        downloaded = false;
         knn = (EditText) findViewById(R.id.kNN);
         knnParam = (TextView) findViewById(R.id.knnParams);
         svmParam3 = (TextView) findViewById(R.id.svmParams3);
@@ -166,42 +183,28 @@ public class MainActivity extends AppCompatActivity {
 
                 //TODO: Need to change the progress update, DEPRECATED
                 //TODO Set listener for downloading the model after training data is sent, meanwhile run wait animation on UI thread
-                if (!downloaded) {
-                    final ProgressDialog pDialog = ProgressDialog.show(MainActivity.this, "Training model", "Wait while training...");
-                    new Thread() {
-                        public void run() {
-                            try {
-                                sleep(1000);
-                            } catch (Exception e) {
-                            }
-                            pDialog.dismiss();
-                        }
-                    }.start();
-                }
 
+                Toast.makeText(MainActivity.this, "Training . . .", Toast.LENGTH_LONG).show();
                 long trainStart = System.currentTimeMillis();
 
                 UploadTask uploadTask = new UploadTask(MainActivity.this);
                 uploadTask.execute(uploadFilePath + trainFile);
 
-                Toast.makeText(MainActivity.this, "Model file downloading", Toast.LENGTH_LONG).show();
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+//                Toast.makeText(MainActivity.this, "Model file downloading", Toast.LENGTH_SHORT).show();
 
                 DownloadTask downloadTask = new DownloadTask(MainActivity.this);
                 downloadTask.execute(downloadUrl+mname);
                 downloaded = true;
+
+                long trainEnd = System.currentTimeMillis();
+                long trainDelta = trainEnd - trainStart;
+                elapsedTrainSeconds = trainDelta;
+
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                long trainEnd = System.currentTimeMillis();
-                long trainDelta = trainEnd - trainStart;
-                elapsedTrainSeconds = trainDelta;
 
                 TextView tv = (TextView) findViewById(R.id.modelName);
                 File modelFile = new File(downloadFilePath+model);
@@ -227,7 +230,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG,"Testing Button Clicked");
 
                 try {
-
                     Instances train = getDataFromResource(dataSplit, "Train");
                     Instances test = getDataFromResource(dataSplit, "Test");
 
@@ -236,6 +238,9 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Model file does not exist! Please train model before testing!", Toast.LENGTH_LONG).show();
                     }
                     else {
+
+                        Toast.makeText(MainActivity.this, "Testing . . .", Toast.LENGTH_SHORT).show();
+
                         FileInputStream fis = new FileInputStream(downloadFilePath + model);
                         //Classifier cls = (Classifier) weka.core.SerializationHelper.read(fis);
                         Classifier cls = (Classifier) weka.core.SerializationHelper.read(Environment.getExternalStorageDirectory() + "/Android/data/MLBenchmark/" + model);
@@ -250,6 +255,7 @@ public class MainActivity extends AppCompatActivity {
 
                         Intent intent = new Intent();
                         Bundle bundle = new Bundle();
+                        bundle.putSerializable("Model", mname);
                         bundle.putSerializable("EvalModel", eval);
                         bundle.putSerializable("TestTime", elapsedSeconds);
                         bundle.putSerializable("TrainTime", elapsedTrainSeconds);
@@ -394,6 +400,8 @@ public class MainActivity extends AppCompatActivity {
                     svmKernel.setVisibility(View.INVISIBLE);
                     break;
                 case "k-Nearest Neighbour": algorithm = 3;
+                    model = "knn.model";
+                    mname = "KNN";
                     Toast.makeText(parent.getContext(),
                             "ML Algorithm selected : " + parent.getItemAtPosition(pos).toString(),
                             Toast.LENGTH_SHORT).show();
@@ -442,6 +450,11 @@ public class MainActivity extends AppCompatActivity {
                         svmKernel.setVisibility(View.VISIBLE);
                     break;
                 default: Toast.makeText(MainActivity.this, "None", Toast.LENGTH_LONG).show();
+            }
+            File modelFile = new File(downloadFilePath+model);
+            System.out.println("file......."+downloadFilePath+model);
+            if (modelFile.exists()) {
+                modelFile.delete();
             }
             Log.d(TAG, "Algorithm selected: "+algorithm);
             Log.d(TAG, "SVM selected: "+svmK);
