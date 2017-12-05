@@ -125,8 +125,6 @@ public class testingData extends AppCompatActivity {
 
         testSummary = eval.toSummaryString("\nPerformance Summary\n======\n", false); // Test summary available
 
-//        System.out.println(testSummary);
-
         double trr = eval.trueNegativeRate(0) * 100;
         double tar = eval.truePositiveRate(0) * 100;
         double frr = eval.falseNegativeRate(0) * 100;
@@ -153,12 +151,6 @@ public class testingData extends AppCompatActivity {
 
         TextView textViewTestTime = (TextView) findViewById(R.id.test_time);
         textViewTestTime.setText(Double.toString(testTimeElapsed)+" ms.");
-
-//        System.out.println("True Accept Rate (TAR): "+tar+" %");
-//        System.out.println("True Reject Rate (TAR): "+trr+" %");
-//        System.out.println("False Accept Rate (TAR): "+far+" %");
-//        System.out.println("False Reject Rate (TAR): "+frr+" %");
-//        System.out.println("HTER: "+hter+" %");
 
         TRR = Double.toString(trr);
         FRR = Double.toString(frr);
