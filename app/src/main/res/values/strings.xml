@@ -7,7 +7,7 @@
     <string-array name="ml_arrays">
         <item>Logistic Regression</item>
         <item>Náive Bayes Classifier</item>
-        <item>k-Nearest Neighbour</item>
+        <item>k-Nearest Neighbor</item>
         <item>Support Vector Machine</item>
     </string-array>
 

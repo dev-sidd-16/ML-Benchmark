@@ -289,7 +289,12 @@ public class MainActivity extends AppCompatActivity {
 
                         Intent intent = new Intent();
                         Bundle bundle = new Bundle();
+
+                        String d_Split = Float.toString(dataSplit);
+                        bundle.putSerializable("DataSplit", d_Split);
+
                         bundle.putSerializable("Model", finalMName);
+
                         bundle.putSerializable("EvalModel", eval);
                         bundle.putSerializable("TestTime", elapsedSeconds);
                         bundle.putSerializable("TrainTime", elapsedTrainSeconds);
@@ -435,7 +440,7 @@ public class MainActivity extends AppCompatActivity {
                     svmParam3.setVisibility(View.INVISIBLE);
                     svmKernel.setVisibility(View.INVISIBLE);
                     break;
-                case "k-Nearest Neighbour": algorithm = 3;
+                case "k-Nearest Neighbor": algorithm = 3;
                     model = "knn.model";
                     mname = "KNN_"+k_nn+"_";
                     finalMName = mname+crossValidation;
