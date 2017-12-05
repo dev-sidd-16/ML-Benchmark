@@ -1,11 +1,9 @@
 package com.example.siddprakash.mlbenchmarkgroup26;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.*;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.os.AsyncTask;
@@ -14,32 +12,21 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.ButtonBarLayout;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -52,14 +39,7 @@ import java.net.URL;
 
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
-import weka.classifiers.functions.SMO;
 import weka.core.Instances;
-import weka.core.converters.ConverterUtils.DataSource;
-import weka.core.pmml.jaxbbindings.EventValues;
-import weka.gui.*;
-
-import static com.example.siddprakash.mlbenchmarkgroup26.R.string.test;
-import static com.example.siddprakash.mlbenchmarkgroup26.R.string.train;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -86,14 +66,15 @@ public class MainActivity extends AppCompatActivity {
     private Context context;
     private String trainData;
     private String trainFile;
+    private String mname = "LR";
 
     private String appFolderPath = Environment.getExternalStorageDirectory() + "/Android/Data/MLBenchmark/";
 
     private static final String uploadFilePath = Environment.getExternalStorageDirectory() + "/Android/Data/MLBenchmark/";
     private static final String downloadFilePath = Environment.getExternalStorageDirectory() + "/Android/Data/MLBenchmark/";
-    public static final String upLoadURL = "/Android/Data/MLBenchmarkTest/";
-//    public static final String downloadUrl = "http://ec2-54-219-146-0.us-west-1.compute.amazonaws.com:8080/train/SVM";
-    public static final String downloadUrl = "http://10.152.114.187:8080/train/SVM";
+    public static final String upLoadURL = "http://ec2-54-219-146-0.us-west-1.compute.amazonaws.com:8080/upload/";
+    public static final String downloadUrl = "http://ec2-54-219-146-0.us-west-1.compute.amazonaws.com:8080/train/";
+    //public static final String downloadUrl = "http://10.152.114.187:8080/train/SVM";
 
 
 
@@ -148,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
 
         saveParams = (Button) findViewById(R.id.algoButton);
         // TODO: Need to check the format of traning file we need to send to server
-        trainFile = "trainFile"+algorithm+".data";
+        trainFile = "trainFile"+algorithm+".arff";
 
         saveParams.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -200,22 +181,35 @@ public class MainActivity extends AppCompatActivity {
 
                 long trainStart = System.currentTimeMillis();
 
-//                UploadTask uploadTask = new UploadTask(MainActivity.this);
-//                uploadTask.execute(uploadFilePath + trainFile);
+                UploadTask uploadTask = new UploadTask(MainActivity.this);
+                uploadTask.execute(uploadFilePath + trainFile);
+
+                Toast.makeText(MainActivity.this, "Model file downloading", Toast.LENGTH_LONG).show();
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
 
                 DownloadTask downloadTask = new DownloadTask(MainActivity.this);
-                downloadTask.execute(downloadUrl + model);
+                downloadTask.execute(downloadUrl+mname);
                 downloaded = true;
-
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 long trainEnd = System.currentTimeMillis();
                 long trainDelta = trainEnd - trainStart;
                 elapsedTrainSeconds = trainDelta;
 
                 TextView tv = (TextView) findViewById(R.id.modelName);
                 File modelFile = new File(downloadFilePath+model);
+                System.out.println("file......."+downloadFilePath+model);
 
                 if (!modelFile.exists()) {
                     tv.setText("No");
+                    System.out.println("Does not exists..............");
                 }
                 else{
                     tv.setText("Yes");
@@ -242,7 +236,8 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Model file does not exist! Please train model before testing!", Toast.LENGTH_LONG).show();
                     }
                     else {
-
+                        FileInputStream fis = new FileInputStream(downloadFilePath + model);
+                        //Classifier cls = (Classifier) weka.core.SerializationHelper.read(fis);
                         Classifier cls = (Classifier) weka.core.SerializationHelper.read(Environment.getExternalStorageDirectory() + "/Android/data/MLBenchmark/" + model);
 //                    Classifier cls = (Classifier) weka.core.SerializationHelper.read(Environment.getExternalStorageDirectory()+"/Android/data/MLBenchmarkTest/abc.model");
                         long testStart = System.currentTimeMillis();
@@ -289,7 +284,7 @@ public class MainActivity extends AppCompatActivity {
 
     private String createPartition(float dataSplit, String fName) throws IOException {
 
-        File myFile = new File(Environment.getExternalStorageDirectory()+"/Android/data/MLBenchmark/breast-cancer-wisconsin.data");
+        File myFile = new File(Environment.getExternalStorageDirectory()+"/Android/data/MLBenchmark/breast-cancer-wisconsin.arff");
         FileInputStream fIn = new FileInputStream(myFile);
         BufferedReader r = new BufferedReader( new InputStreamReader( fIn ) );
 
@@ -339,9 +334,9 @@ public class MainActivity extends AppCompatActivity {
 
     public static Instances getDataFromResource(float dSplit, String status) throws IOException {
 
-        //TODO: Convert breast-cancer-wisconsin.data to breast-cancer-wisconsin.txt
+        //TODO: Convert breast-cancer-wisconsin.data to breast-cancer-wisconsin.arff
 
-        File myFile = new File(Environment.getExternalStorageDirectory()+"/Android/data/MLBenchmark/breast-cancer-wisconsin.txt");
+        File myFile = new File(Environment.getExternalStorageDirectory()+"/Android/data/MLBenchmark/breast-cancer-wisconsin.arff");
         FileInputStream fIn = new FileInputStream(myFile);
         BufferedReader r = new BufferedReader( new InputStreamReader( fIn ) );
 
@@ -355,7 +350,7 @@ public class MainActivity extends AppCompatActivity {
         int trainSize = (int) Math.round(trainingSet.numInstances() * dSplit);
         int testSize = trainingSet.numInstances() - trainSize;
         Instances train = new Instances(trainingSet, 0, trainSize);
-        Instances test = new Instances(trainingSet, trainSize, testSize);
+        Instances test = new Instances(trainingSet, trainSize,testSize);
 
         if(status.equalsIgnoreCase("Train"))
             return train;
@@ -377,6 +372,7 @@ public class MainActivity extends AppCompatActivity {
             switch (parent.getItemAtPosition(pos).toString()){
                 case "Logistic Regression": algorithm = 1;
                     model = "lr.model";
+                    mname = "LR";
                     Toast.makeText(parent.getContext(),
                             "ML Algorithm selected : " + parent.getItemAtPosition(pos).toString(),
                             Toast.LENGTH_SHORT).show();
@@ -388,6 +384,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case "Náive Bayes Classifier": algorithm = 2;
                     model = "nb.model";
+                    mname = "NB";
                     Toast.makeText(parent.getContext(),
                             "ML Algorithm selected : " + parent.getItemAtPosition(pos).toString(),
                             Toast.LENGTH_SHORT).show();
@@ -397,7 +394,6 @@ public class MainActivity extends AppCompatActivity {
                     svmKernel.setVisibility(View.INVISIBLE);
                     break;
                 case "k-Nearest Neighbour": algorithm = 3;
-                    model = "knn.model";
                     Toast.makeText(parent.getContext(),
                             "ML Algorithm selected : " + parent.getItemAtPosition(pos).toString(),
                             Toast.LENGTH_SHORT).show();
@@ -408,6 +404,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case "Support Vector Machine": algorithm = 4;
                     model = "svm.model";
+                    mname = "SVM";
                     Toast.makeText(parent.getContext(),
                             "ML Algorithm selected : " + parent.getItemAtPosition(pos).toString(),
                             Toast.LENGTH_SHORT).show();
@@ -518,7 +515,7 @@ public class MainActivity extends AppCompatActivity {
                         dos = new DataOutputStream(conn.getOutputStream());
 
                         dos.writeBytes(twoHyphens + boundary + lineEnd);
-                        dos.writeBytes("Content-Disposition: form-data; name=" + "uploaded_file;filename="
+                        dos.writeBytes("Content-Disposition: form-data; name=" + "uploaded_file;file="
                                 + uploadFilePath + "" + trainFile + "" + lineEnd);
 
                         dos.writeBytes(lineEnd);
@@ -739,7 +736,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void copyAssetsDataIfNeed(){
-        String assetsToCopy[] = {"breast-cancer-wisconsin.data", "breast-cancer-wisconsin.txt"};
+        String assetsToCopy[] = {"breast-cancer-wisconsin.arff"};
         for(int i=0; i<assetsToCopy.length; i++){
             String from = assetsToCopy[i];
             String to = appFolderPath+from;

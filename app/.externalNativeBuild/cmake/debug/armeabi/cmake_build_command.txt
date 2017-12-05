@@ -1,14 +1,14 @@
-Executable : /Users/siddPrakash/Library/Android/sdk/cmake/3.6.4111459/bin/cmake
+Executable : C:\Users\kanun\AppData\Local\Android\Sdk\cmake\3.6.4111459\bin\cmake.exe
 arguments : 
--H/Users/siddPrakash/MLBenchmarkGroup26/app
--B/Users/siddPrakash/MLBenchmarkGroup26/app/.externalNativeBuild/cmake/debug/armeabi
+-HC:\Users\kanun\Desktop\MCproject\Android\ML-Benchmark\app
+-BC:\Users\kanun\Desktop\MCproject\Android\ML-Benchmark\app\.externalNativeBuild\cmake\debug\armeabi
 -GAndroid Gradle - Ninja
 -DANDROID_ABI=armeabi
--DANDROID_NDK=/Users/siddPrakash/Library/Android/sdk/ndk-bundle
--DCMAKE_LIBRARY_OUTPUT_DIRECTORY=/Users/siddPrakash/MLBenchmarkGroup26/app/build/intermediates/cmake/debug/obj/armeabi
+-DANDROID_NDK=C:\Users\kanun\AppData\Local\Android\Sdk\ndk-bundle
+-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=C:\Users\kanun\Desktop\MCproject\Android\ML-Benchmark\app\build\intermediates\cmake\debug\obj\armeabi
 -DCMAKE_BUILD_TYPE=Debug
--DCMAKE_MAKE_PROGRAM=/Users/siddPrakash/Library/Android/sdk/cmake/3.6.4111459/bin/ninja
--DCMAKE_TOOLCHAIN_FILE=/Users/siddPrakash/Library/Android/sdk/ndk-bundle/build/cmake/android.toolchain.cmake
+-DCMAKE_MAKE_PROGRAM=C:\Users\kanun\AppData\Local\Android\Sdk\cmake\3.6.4111459\bin\ninja.exe
+-DCMAKE_TOOLCHAIN_FILE=C:\Users\kanun\AppData\Local\Android\Sdk\ndk-bundle\build\cmake\android.toolchain.cmake
 -DANDROID_PLATFORM=android-17
 -DCMAKE_CXX_FLAGS=
 jvmArgs : 

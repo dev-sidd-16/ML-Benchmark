@@ -3,48 +3,138 @@
 
     <item
         is-multidex="true"
-        jar="/Users/siddPrakash/.android/build-cache/129564c64fa6edfacb9450cc3a73ca465ff4bb2a/output/jars/classes.jar"
+        jar="C:\Users\kanun\.android\build-cache\e26a7482b44fea3df1d86254227cd2e21cb5c08f\output\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="26.0.1"
-        sha1="c4f45092eee6cdf1a5dbd597b2b6819be652ce2e">
-        <dex dex="/Users/siddPrakash/MLBenchmarkGroup26/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_34c734b62770d39406f44bd7d72b2394ca6b16d5/classes.dex" />
+        sha1="fcd01fd11233459f546c437ec927e9b61bf7caf1">
+        <dex dex="C:\Users\kanun\Desktop\MCproject\Android\ML-Benchmark\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_4aff4eef7342f50ee4a52f7530e626c419ea2663\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/siddPrakash/.android/build-cache/6fa2134f65cd4b4c749479a9373bb7518add2720/output/jars/classes.jar"
+        jar="C:\Users\kanun\.android\build-cache\02ed059bef78527fc333e6086806e2dba50d6a44\output\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="26.0.1"
-        sha1="cddcd0fb93bc70e27325f2f715b2710332004ebb">
-        <dex dex="/Users/siddPrakash/MLBenchmarkGroup26/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_378de77d1b3ac96470bdb4899a29c59f6fe3a4dd/classes.dex" />
+        sha1="18d31838aa4fcc768a8a0516e22cc13b94655d89">
+        <dex dex="C:\Users\kanun\Desktop\MCproject\Android\ML-Benchmark\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_6eaed53307be0faba7709655d82f4f5e87da73f9\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/siddPrakash/.android/build-cache/35931563302f6218f7853c22d17fcd2727d3bbee/output/jars/classes.jar"
+        jar="C:\Users\kanun\.android\build-cache\d181430fc0dd60397303a998221d4bf848faaaea\output\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="26.0.1"
-        sha1="6a022bf00ccd0948a8180c505e8e458bbddd43a6">
-        <dex dex="/Users/siddPrakash/MLBenchmarkGroup26/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_7f5995dded78ca99b4c7853b84f4ced080bf787d/classes.dex" />
+        sha1="47471eb19df288158b00b8d9cfa41bce7373f5cc">
+        <dex dex="C:\Users\kanun\Desktop\MCproject\Android\ML-Benchmark\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_6e405fad45f98a8bdb19183ee49ded338c803c97\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/siddPrakash/MLBenchmarkGroup26/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="89cc014b6ee8507ff0163a867da2ec3becea6510">
-        <dex dex="/Users/siddPrakash/MLBenchmarkGroup26/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_c015e05fd75049305f06f8d3ecf48e01205a8efe/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/siddPrakash/MLBenchmarkGroup26/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jar="C:\Users\kanun\Desktop\MCproject\Android\ML-Benchmark\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="26.0.1"
         sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
-        <dex dex="/Users/siddPrakash/MLBenchmarkGroup26/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_29fce6539704913462a8e73bc34daa65bf8dddea/classes.dex" />
+        <dex dex="C:\Users\kanun\Desktop\MCproject\Android\ML-Benchmark\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_c80c15d7b195021878bdc4c07951d690c3d13534\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\kanun\.android\build-cache\1c40c38f60f61a6092f6810e9dfe5a381d2542ce\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="c4f45092eee6cdf1a5dbd597b2b6819be652ce2e">
+        <dex dex="C:\Users\kanun\Desktop\MCproject\Android\ML-Benchmark\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_e7c57aae2cdc886034bb1cf08970cd94fc900f63\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\kanun\.android\build-cache\38cfb7c1bfe7a2b482db0f7d525242f0278098c9\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="9935891f23923f39d002087085d9696568a9f657">
+        <dex dex="C:\Users\kanun\Desktop\MCproject\Android\ML-Benchmark\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_c95974b53fdf1cd2042b3a9231f99dd13a0283b4\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\kanun\.android\build-cache\2bd9fbba8a9659825bd4441a38f75cefc0c1b38a\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="cddcd0fb93bc70e27325f2f715b2710332004ebb">
+        <dex dex="C:\Users\kanun\Desktop\MCproject\Android\ML-Benchmark\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_ee44b72c190ae0ccd0a07e0ff580604b14619081\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\kanun\.android\build-cache\8824b3a43293f8921b5450061084ba9fcbef4995\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Users\kanun\Desktop\MCproject\Android\ML-Benchmark\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_f11588b2811771d45e8228565c5ece232e6ae9a5\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\kanun\.android\build-cache\e4306ed1461b2dbae4358a3deaeaed272115c763\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="88246166d5afb106f532f6e6deae683c66b42c89">
+        <dex dex="C:\Users\kanun\Desktop\MCproject\Android\ML-Benchmark\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_3bda4b12bc77aa5fee8d875bac409f5f2cd36c42\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\kanun\.android\build-cache\369339fcae326f9633cc9d4fd0d7696e62aaa7e2\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="2e92aa0163544a804a0b34f169ca61801770839a">
+        <dex dex="C:\Users\kanun\Desktop\MCproject\Android\ML-Benchmark\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_8778b433d425d326eaf659b3cacba5c7ade6d743\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\kanun\.android\build-cache\48762570717dc329604b36422dd1ac3ff69e4be7\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="6a022bf00ccd0948a8180c505e8e458bbddd43a6">
+        <dex dex="C:\Users\kanun\Desktop\MCproject\Android\ML-Benchmark\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_169cbe454d92ffd12fb3769b0301af728270fec6\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\kanun\.android\build-cache\3d9204a9a6042c664a7ed81cc52cf0929a7da1ac\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="952944218ecedea1554a513dec0c14d570642843">
+        <dex dex="C:\Users\kanun\Desktop\MCproject\Android\ML-Benchmark\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_ca50f9740079efec65f7bc600188ee72fffaa5ef\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\kanun\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\26.0.0-alpha1\support-annotations-26.0.0-alpha1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="023ee503b631f69511e335a061ea008f8da60f40">
+        <dex dex="C:\Users\kanun\Desktop\MCproject\Android\ML-Benchmark\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-26.0.0-alpha1_6851c32985434a2c8411d2a5babc01648447bde2\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\kanun\Desktop\MCproject\Android\ML-Benchmark\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="7316fe1164b2ed79d4438da8c79e52b3e0161b12">
+        <dex dex="C:\Users\kanun\Desktop\MCproject\Android\ML-Benchmark\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_cd59fd878db216ba17f9d1b0c8158f7b3c507b80\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\kanun\.android\build-cache\7ecd712136b7207937ff3eb659b30932ba60552d\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="8df0e365e40beb151bc42dee20817721a6cab7b0">
+        <dex dex="C:\Users\kanun\Desktop\MCproject\Android\ML-Benchmark\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_80f48ed9968172ff99e2e69eb1e3f5c947becc43\classes.dex" />
     </item>
 
 </items>
