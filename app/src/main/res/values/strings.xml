@@ -15,8 +15,9 @@
 
     <string-array name="svm_arrays">
         <item>Linear</item>
+        <item>Polynomial (degree=2)</item>
+        <item>Polynomial (degree=3)</item>
         <item>RBF</item>
-        <item>Poly</item>
     </string-array>
     <string name="title_activity_testing_data">testingData</string>
     <string name="title_activity_training_data">trainingData</string>

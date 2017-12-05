@@ -35,6 +35,8 @@ public class testingData extends AppCompatActivity {
             trainTimeElapsed = (double) bundle.getSerializable("TrainTime");
         }
 
+        model = model.split("_")[0];
+
         tv = (TextView) findViewById(R.id.tr_label);
         switch (model){
             case "LR" : tv.setText("Logistic Regression");

@@ -55,6 +55,9 @@ public class MainActivity extends AppCompatActivity {
     private double elapsedSeconds = 0.0;
 
     private EditText dSplit;
+    private EditText cv;
+    private String crossValidation = "5";
+    private String k_nn = "5";
     private Spinner algo;
     private Spinner svmKernel;
     private Button saveParams;
@@ -67,9 +70,8 @@ public class MainActivity extends AppCompatActivity {
     private Context context;
     private String trainData;
     private String trainFile;
-    private String mname = "LR";
-//    private TextView tv;
-//    private File modelFile;
+    private String mname = "LR_";
+    private String finalMName = mname;
 
     private String appFolderPath = Environment.getExternalStorageDirectory() + "/Android/Data/MLBenchmark/";
 
@@ -106,6 +108,8 @@ public class MainActivity extends AppCompatActivity {
                     ACCESS_EXTERNAL_STORAGE_STATE);
         }
 
+        mname = "LR_";
+
         TextView tv = (TextView) findViewById(R.id.modelName);
         File modelFile = new File(downloadFilePath+model);
         System.out.println("file......."+downloadFilePath+model);
@@ -130,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 dataSplit = Float.valueOf(v.getText().toString());
-                Log.d(TAG, "Data Split= "+dataSplit*100+"%");
+                Log.d(TAG, "Data Split = "+dataSplit*100+"%");
                 return false;
             }
         });
@@ -173,6 +177,36 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        // Cross-Validation Change
+        cv = (EditText) findViewById(R.id.cv);
+        cv.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                crossValidation = v.getText().toString();
+                finalMName = mname+crossValidation;
+                if(algorithm==3) {
+                    k_nn = v.getText().toString();
+                    mname = "KNN_" + k_nn + "_";
+                }
+                Log.d(TAG, "Cross Validation = "+crossValidation);
+                return false;
+            }
+        });
+
+        knn.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                k_nn = v.getText().toString();
+                mname = "KNN_"+k_nn+"_";
+                finalMName = mname+crossValidation;
+                Log.d(TAG, "k Nearest Neighbor = "+k_nn);
+                return false;
+            }
+        });
+
         // Training Code
         // Send the data set file to server
         trainButton = (Button) findViewById(R.id.trainbutton);
@@ -190,10 +224,10 @@ public class MainActivity extends AppCompatActivity {
                 UploadTask uploadTask = new UploadTask(MainActivity.this);
                 uploadTask.execute(uploadFilePath + trainFile);
 
-//                Toast.makeText(MainActivity.this, "Model file downloading", Toast.LENGTH_SHORT).show();
+                Log.d(TAG, downloadFilePath+finalMName);
 
                 DownloadTask downloadTask = new DownloadTask(MainActivity.this);
-                downloadTask.execute(downloadUrl+mname);
+                downloadTask.execute(downloadUrl+finalMName);
                 downloaded = true;
 
                 long trainEnd = System.currentTimeMillis();
@@ -255,7 +289,7 @@ public class MainActivity extends AppCompatActivity {
 
                         Intent intent = new Intent();
                         Bundle bundle = new Bundle();
-                        bundle.putSerializable("Model", mname);
+                        bundle.putSerializable("Model", finalMName);
                         bundle.putSerializable("EvalModel", eval);
                         bundle.putSerializable("TestTime", elapsedSeconds);
                         bundle.putSerializable("TrainTime", elapsedTrainSeconds);
@@ -378,7 +412,8 @@ public class MainActivity extends AppCompatActivity {
             switch (parent.getItemAtPosition(pos).toString()){
                 case "Logistic Regression": algorithm = 1;
                     model = "lr.model";
-                    mname = "LR";
+                    mname = "LR_";
+                    finalMName = mname+crossValidation;
                     Toast.makeText(parent.getContext(),
                             "ML Algorithm selected : " + parent.getItemAtPosition(pos).toString(),
                             Toast.LENGTH_SHORT).show();
@@ -390,7 +425,8 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case "Náive Bayes Classifier": algorithm = 2;
                     model = "nb.model";
-                    mname = "NB";
+                    mname = "NB_";
+                    finalMName = mname+crossValidation;
                     Toast.makeText(parent.getContext(),
                             "ML Algorithm selected : " + parent.getItemAtPosition(pos).toString(),
                             Toast.LENGTH_SHORT).show();
@@ -401,7 +437,8 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case "k-Nearest Neighbour": algorithm = 3;
                     model = "knn.model";
-                    mname = "KNN";
+                    mname = "KNN_"+k_nn+"_";
+                    finalMName = mname+crossValidation;
                     Toast.makeText(parent.getContext(),
                             "ML Algorithm selected : " + parent.getItemAtPosition(pos).toString(),
                             Toast.LENGTH_SHORT).show();
@@ -412,7 +449,9 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case "Support Vector Machine": algorithm = 4;
                     model = "svm.model";
-                    mname = "SVM";
+                    mname = "SVM_poly1_";
+                    finalMName = mname+crossValidation;
+                    Log.d(TAG,"Called SVM MODEL Selection");
                     Toast.makeText(parent.getContext(),
                             "ML Algorithm selected : " + parent.getItemAtPosition(pos).toString(),
                             Toast.LENGTH_SHORT).show();
@@ -421,33 +460,60 @@ public class MainActivity extends AppCompatActivity {
                     svmParam3.setVisibility(View.VISIBLE);
                     svmKernel.setVisibility(View.VISIBLE);
                     break;
-                case "Linear": svmK = 0;
-                    if(begin) {
-                        svmParam3.setVisibility(View.INVISIBLE);
-                        svmKernel.setVisibility(View.INVISIBLE);
-                        begin = false;
+                case "Linear":
+                    if(algorithm==4) {
+                        svmK = 0;
+                        mname = "SVM_poly1_";
+                        finalMName = mname + crossValidation;
+                        Log.d(TAG, "Called SVM PARAM Selection");
+                        if (begin) {
+                            svmParam3.setVisibility(View.INVISIBLE);
+                            svmKernel.setVisibility(View.INVISIBLE);
+                            begin = false;
+                        } else {
+                            svmParam3.setVisibility(View.VISIBLE);
+                            svmKernel.setVisibility(View.VISIBLE);
+                            Toast.makeText(parent.getContext(),
+                                    "SVM Kernel selected : " + parent.getItemAtPosition(pos).toString(),
+                                    Toast.LENGTH_SHORT).show();
+                        }
                     }
-                    else{
-                        svmParam3.setVisibility(View.VISIBLE);
-                        svmKernel.setVisibility(View.VISIBLE);
+                    break;
+                case "RBF":
+                    if(algorithm==4) {
+                        svmK = 1;
+                        mname = "SVM_rbf_";
+                        finalMName = mname + crossValidation;
                         Toast.makeText(parent.getContext(),
                                 "SVM Kernel selected : " + parent.getItemAtPosition(pos).toString(),
                                 Toast.LENGTH_SHORT).show();
+                        svmParam3.setVisibility(View.VISIBLE);
+                        svmKernel.setVisibility(View.VISIBLE);
                     }
                     break;
-                case "RBF": svmK = 1;
-                    Toast.makeText(parent.getContext(),
-                            "SVM Kernel selected : " + parent.getItemAtPosition(pos).toString(),
-                            Toast.LENGTH_SHORT).show();
+                case "Polynomial (degree=2)":
+                    if(algorithm==4) {
+                        svmK = 2;
+                        mname = "SVM_poly2_";
+                        finalMName = mname + crossValidation;
+                        Toast.makeText(parent.getContext(),
+                                "SVM Kernel selected : " + parent.getItemAtPosition(pos).toString(),
+                                Toast.LENGTH_SHORT).show();
                         svmParam3.setVisibility(View.VISIBLE);
                         svmKernel.setVisibility(View.VISIBLE);
+                    }
                     break;
-                case "Poly": svmK = 2;
-                    Toast.makeText(parent.getContext(),
-                            "SVM Kernel selected : " + parent.getItemAtPosition(pos).toString(),
-                            Toast.LENGTH_SHORT).show();
+                case "Polynomial (degree=3)":
+                    if(algorithm==4) {
+                        svmK = 2;
+                        mname = "SVM_poly3_";
+                        finalMName = mname + crossValidation;
+                        Toast.makeText(parent.getContext(),
+                                "SVM Kernel selected : " + parent.getItemAtPosition(pos).toString(),
+                                Toast.LENGTH_SHORT).show();
                         svmParam3.setVisibility(View.VISIBLE);
                         svmKernel.setVisibility(View.VISIBLE);
+                    }
                     break;
                 default: Toast.makeText(MainActivity.this, "None", Toast.LENGTH_LONG).show();
             }
