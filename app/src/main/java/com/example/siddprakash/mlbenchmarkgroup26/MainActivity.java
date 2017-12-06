@@ -130,7 +130,6 @@ public class MainActivity extends AppCompatActivity {
         // Get the split percentage value from text input
         dSplit = (EditText) findViewById(R.id.DSplit);
         dSplit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 dataSplit = Float.valueOf(v.getText().toString());
@@ -287,14 +286,16 @@ public class MainActivity extends AppCompatActivity {
 
                         eval.evaluateModel(cls, test);
 
+                        Boolean viewIntent = false;
+
                         Intent intent = new Intent();
                         Bundle bundle = new Bundle();
 
                         String d_Split = Float.toString(dataSplit);
+
                         bundle.putSerializable("DataSplit", d_Split);
-
+                        bundle.putSerializable("ViewIntent", viewIntent);
                         bundle.putSerializable("Model", finalMName);
-
                         bundle.putSerializable("EvalModel", eval);
                         bundle.putSerializable("TestTime", elapsedSeconds);
                         bundle.putSerializable("TrainTime", elapsedTrainSeconds);

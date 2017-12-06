@@ -34,6 +34,8 @@ public class testingData extends AppCompatActivity {
     private String TRR, FRR, TAR, FAR, HTER, trainTime, testTime, testSummary, split, cv, k_nn, kernel;
     private String log = "";
     private File logFile;
+    private Bundle bundle;
+    private boolean vIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class testingData extends AppCompatActivity {
         setContentView(R.layout.activity_testing_data);
 
         logButton = (Button) findViewById(R.id.logbutton);
+
         if (!isExternalStorageAvailable() || isExternalStorageReadOnly()) {
             logButton.setEnabled(false);
         }
@@ -49,8 +52,9 @@ public class testingData extends AppCompatActivity {
             logFile = new File(logFileName);
         }
 
-        Bundle bundle = this.getIntent().getExtras();
+        bundle = this.getIntent().getExtras();
         if (bundle != null) {
+            vIntent = (Boolean) bundle.getSerializable("ViewIntent");
             split = (String)bundle.getSerializable("DataSplit");
             model = (String) bundle.getSerializable("Model");
             eval = (Evaluation) bundle.getSerializable("EvalModel");
@@ -63,7 +67,7 @@ public class testingData extends AppCompatActivity {
         model = modelParams[0]; // Model available
         k_nn = "5";
 
-        log = "===============================================================================\n";
+        log = "=================================================\n";
 
         tv = (TextView) findViewById(R.id.tr_label);
         switch (model){
@@ -199,13 +203,15 @@ public class testingData extends AppCompatActivity {
 
         System.out.println(log);
 
-        FileOutputStream outputStream;
-        try {
-            outputStream = new FileOutputStream(logFile, true);
-            outputStream.write(log.getBytes());
-            outputStream.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        if(!vIntent) {
+            FileOutputStream outputStream;
+            try {
+                outputStream = new FileOutputStream(logFile, true);
+                outputStream.write(log.getBytes());
+                outputStream.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         backButton = (Button) findViewById(R.id.backbutton);
@@ -221,8 +227,9 @@ public class testingData extends AppCompatActivity {
         logButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(testingData.this, MainActivity.class);1
-//                startActivity(intent);
+                Intent intent = new Intent(testingData.this, ViewLogFile.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
     }
