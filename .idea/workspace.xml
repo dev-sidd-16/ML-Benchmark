@@ -18,7 +18,7 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="MLBenchmark" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8b64998b-c709-430a-9b5b-66a541539a0b" name="Default" comment="">
@@ -26,17 +26,12 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/siddprakash/mlbenchmarkgroup26/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/siddprakash/mlbenchmarkgroup26/MainActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/siddprakash/mlbenchmarkgroup26/testingData.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/siddprakash/mlbenchmarkgroup26/testingData.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" afterPath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" />
     </list>
     <ignored path="ML Benchmark Group 26.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -71,39 +66,14 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/siddprakash/mlbenchmarkgroup26/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1125">
-              <caret line="162" column="45" selection-start-line="162" selection-start-column="45" selection-end-line="162" selection-end-column="45" />
+            <state relative-caret-position="1905">
+              <caret line="180" column="42" selection-start-line="180" selection-start-column="42" selection-end-line="180" selection-end-column="42" />
               <folding>
-                <element signature="e#4620#4951#0" expanded="true" />
-                <element signature="e#4950#4951#0" expanded="true" />
-                <element signature="e#5580#6522#0" expanded="true" />
-                <element signature="e#6521#6522#0" expanded="true" />
-                <element signature="e#6646#7178#0" expanded="true" />
-                <element signature="e#7177#7178#0" expanded="true" />
-                <element signature="e#7220#7620#0" expanded="true" />
-                <element signature="e#7619#7620#0" expanded="true" />
-                <element signature="e#7795#9512#0" expanded="true" />
-                <element signature="e#9511#9512#0" expanded="true" />
-                <element signature="e#9640#12279#0" expanded="true" />
-                <element signature="e#12278#12279#0" expanded="true" />
                 <element signature="method#onRequestPermissionsResult#0;class#MainActivity#0" expanded="false" />
-                <element signature="method#createPartition#0;class#MainActivity#0" expanded="false" />
                 <element signature="method#getDataFromResource#0;class#MainActivity#0" expanded="false" />
                 <element signature="class#SpinnerActivity#0;class#MainActivity#0" expanded="false" />
                 <element signature="class#UploadTask#0;class#MainActivity#0" expanded="false" />
-                <element signature="e#23564#23869#0" expanded="true" />
-                <element signature="e#23868#23869#0" expanded="true" />
-                <element signature="e#26739#27113#0" expanded="true" />
-                <element signature="e#27112#27113#0" expanded="true" />
-                <element signature="e#27572#27886#0" expanded="true" />
-                <element signature="e#27885#27886#0" expanded="true" />
-                <element signature="e#28240#28529#0" expanded="true" />
-                <element signature="e#28528#28529#0" expanded="true" />
                 <element signature="class#DownloadTask#0;class#MainActivity#0" expanded="false" />
-                <element signature="e#30679#31170#0" expanded="true" />
-                <element signature="e#30790#31111#0" expanded="true" />
-                <element signature="e#31110#31111#0" expanded="true" />
-                <element signature="e#31169#31170#0" expanded="true" />
                 <element signature="method#CreateAppFolderIfNeed#0;class#MainActivity#0" expanded="false" />
                 <element signature="method#copyFile#0;class#MainActivity#0" expanded="false" />
                 <element signature="method#copyAsset#0;class#MainActivity#0" expanded="false" />
@@ -116,29 +86,27 @@
       <file leaf-file-name="SplashActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/siddprakash/mlbenchmarkgroup26/SplashActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
+            <state relative-caret-position="120">
               <caret line="11" column="32" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="testingData.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/siddprakash/mlbenchmarkgroup26/testingData.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-321">
-              <caret line="72" column="23" selection-start-line="72" selection-start-column="23" selection-end-line="72" selection-end-column="23" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ViewLogFile.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="testingData.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/siddprakash/mlbenchmarkgroup26/testingData.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="840">
+              <caret line="72" column="30" selection-start-line="72" selection-start-column="30" selection-end-line="72" selection-end-column="30" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ViewLogFile.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/siddprakash/mlbenchmarkgroup26/ViewLogFile.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
+            <state relative-caret-position="1020">
               <caret line="84" column="57" selection-start-line="84" selection-start-column="57" selection-end-line="84" selection-end-column="57" />
               <folding />
             </state>
@@ -151,7 +119,7 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1466">
+            <state relative-caret-position="1980">
               <caret line="146" column="16" selection-start-line="146" selection-start-column="16" selection-end-line="146" selection-end-column="16" />
               <folding>
                 <element signature="e#3489#4152#0" expanded="false" />
@@ -2560,10 +2528,10 @@
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_testing_data.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/siddprakash/mlbenchmarkgroup26/ViewLogFile.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/siddprakash/mlbenchmarkgroup26/MainActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/siddprakash/mlbenchmarkgroup26/testingData.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/content_view_log_file.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_view_log_file.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/siddprakash/mlbenchmarkgroup26/testingData.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/siddprakash/mlbenchmarkgroup26/MainActivity.java" />
       </list>
     </option>
   </component>
@@ -3024,8 +2992,7 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.55731595" sideWeight="0.18133971" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3611898" sideWeight="0.81866026" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3602585" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.48016998" sideWeight="0.81866026" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32911393" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286119" sideWeight="0.49353796" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3280522" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -3045,6 +3012,7 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3602585" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32991612" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -3143,36 +3111,11 @@
         <state relative-caret-position="2655">
           <caret line="204" column="50" selection-start-line="204" selection-start-column="50" selection-end-line="204" selection-end-column="50" />
           <folding>
-            <element signature="e#4620#4951#0" expanded="true" />
-            <element signature="e#4950#4951#0" expanded="true" />
-            <element signature="e#5580#6522#0" expanded="true" />
-            <element signature="e#6521#6522#0" expanded="true" />
-            <element signature="e#6646#7178#0" expanded="true" />
-            <element signature="e#7177#7178#0" expanded="true" />
-            <element signature="e#7220#7620#0" expanded="true" />
-            <element signature="e#7619#7620#0" expanded="true" />
-            <element signature="e#7795#9512#0" expanded="true" />
-            <element signature="e#9511#9512#0" expanded="true" />
-            <element signature="e#9640#12279#0" expanded="true" />
-            <element signature="e#12278#12279#0" expanded="true" />
             <element signature="method#onRequestPermissionsResult#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#createPartition#0;class#MainActivity#0" expanded="false" />
             <element signature="method#getDataFromResource#0;class#MainActivity#0" expanded="false" />
             <element signature="class#SpinnerActivity#0;class#MainActivity#0" expanded="false" />
             <element signature="class#UploadTask#0;class#MainActivity#0" expanded="false" />
-            <element signature="e#23564#23869#0" expanded="true" />
-            <element signature="e#23868#23869#0" expanded="true" />
-            <element signature="e#26739#27113#0" expanded="true" />
-            <element signature="e#27112#27113#0" expanded="true" />
-            <element signature="e#27572#27886#0" expanded="true" />
-            <element signature="e#27885#27886#0" expanded="true" />
-            <element signature="e#28240#28529#0" expanded="true" />
-            <element signature="e#28528#28529#0" expanded="true" />
             <element signature="class#DownloadTask#0;class#MainActivity#0" expanded="false" />
-            <element signature="e#30679#31170#0" expanded="true" />
-            <element signature="e#30790#31111#0" expanded="true" />
-            <element signature="e#31110#31111#0" expanded="true" />
-            <element signature="e#31169#31170#0" expanded="true" />
             <element signature="method#CreateAppFolderIfNeed#0;class#MainActivity#0" expanded="false" />
             <element signature="method#copyFile#0;class#MainActivity#0" expanded="false" />
             <element signature="method#copyAsset#0;class#MainActivity#0" expanded="false" />
@@ -3214,36 +3157,11 @@
         <state relative-caret-position="450">
           <caret line="54" column="38" selection-start-line="54" selection-start-column="38" selection-end-line="54" selection-end-column="38" />
           <folding>
-            <element signature="e#4620#4951#0" expanded="true" />
-            <element signature="e#4950#4951#0" expanded="true" />
-            <element signature="e#5580#6522#0" expanded="true" />
-            <element signature="e#6521#6522#0" expanded="true" />
-            <element signature="e#6646#7178#0" expanded="true" />
-            <element signature="e#7177#7178#0" expanded="true" />
-            <element signature="e#7220#7620#0" expanded="true" />
-            <element signature="e#7619#7620#0" expanded="true" />
-            <element signature="e#7795#9512#0" expanded="true" />
-            <element signature="e#9511#9512#0" expanded="true" />
-            <element signature="e#9640#12279#0" expanded="true" />
-            <element signature="e#12278#12279#0" expanded="true" />
             <element signature="method#onRequestPermissionsResult#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#createPartition#0;class#MainActivity#0" expanded="false" />
             <element signature="method#getDataFromResource#0;class#MainActivity#0" expanded="false" />
             <element signature="class#SpinnerActivity#0;class#MainActivity#0" expanded="false" />
             <element signature="class#UploadTask#0;class#MainActivity#0" expanded="false" />
-            <element signature="e#23564#23869#0" expanded="true" />
-            <element signature="e#23868#23869#0" expanded="true" />
-            <element signature="e#26739#27113#0" expanded="true" />
-            <element signature="e#27112#27113#0" expanded="true" />
-            <element signature="e#27572#27886#0" expanded="true" />
-            <element signature="e#27885#27886#0" expanded="true" />
-            <element signature="e#28240#28529#0" expanded="true" />
-            <element signature="e#28528#28529#0" expanded="true" />
             <element signature="class#DownloadTask#0;class#MainActivity#0" expanded="false" />
-            <element signature="e#30679#31170#0" expanded="true" />
-            <element signature="e#30790#31111#0" expanded="true" />
-            <element signature="e#31110#31111#0" expanded="true" />
-            <element signature="e#31169#31170#0" expanded="true" />
             <element signature="method#CreateAppFolderIfNeed#0;class#MainActivity#0" expanded="false" />
             <element signature="method#copyFile#0;class#MainActivity#0" expanded="false" />
             <element signature="method#copyAsset#0;class#MainActivity#0" expanded="false" />
@@ -3285,36 +3203,11 @@
         <state relative-caret-position="765">
           <caret line="51" column="11" selection-start-line="51" selection-start-column="11" selection-end-line="51" selection-end-column="11" />
           <folding>
-            <element signature="e#4620#4951#0" expanded="true" />
-            <element signature="e#4950#4951#0" expanded="true" />
-            <element signature="e#5580#6522#0" expanded="true" />
-            <element signature="e#6521#6522#0" expanded="true" />
-            <element signature="e#6646#7178#0" expanded="true" />
-            <element signature="e#7177#7178#0" expanded="true" />
-            <element signature="e#7220#7620#0" expanded="true" />
-            <element signature="e#7619#7620#0" expanded="true" />
-            <element signature="e#7795#9512#0" expanded="true" />
-            <element signature="e#9511#9512#0" expanded="true" />
-            <element signature="e#9640#12279#0" expanded="true" />
-            <element signature="e#12278#12279#0" expanded="true" />
             <element signature="method#onRequestPermissionsResult#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#createPartition#0;class#MainActivity#0" expanded="false" />
             <element signature="method#getDataFromResource#0;class#MainActivity#0" expanded="false" />
             <element signature="class#SpinnerActivity#0;class#MainActivity#0" expanded="false" />
             <element signature="class#UploadTask#0;class#MainActivity#0" expanded="false" />
-            <element signature="e#23564#23869#0" expanded="true" />
-            <element signature="e#23868#23869#0" expanded="true" />
-            <element signature="e#26739#27113#0" expanded="true" />
-            <element signature="e#27112#27113#0" expanded="true" />
-            <element signature="e#27572#27886#0" expanded="true" />
-            <element signature="e#27885#27886#0" expanded="true" />
-            <element signature="e#28240#28529#0" expanded="true" />
-            <element signature="e#28528#28529#0" expanded="true" />
             <element signature="class#DownloadTask#0;class#MainActivity#0" expanded="false" />
-            <element signature="e#30679#31170#0" expanded="true" />
-            <element signature="e#30790#31111#0" expanded="true" />
-            <element signature="e#31110#31111#0" expanded="true" />
-            <element signature="e#31169#31170#0" expanded="true" />
             <element signature="method#CreateAppFolderIfNeed#0;class#MainActivity#0" expanded="false" />
             <element signature="method#copyFile#0;class#MainActivity#0" expanded="false" />
             <element signature="method#copyAsset#0;class#MainActivity#0" expanded="false" />
@@ -3403,7 +3296,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="630">
           <caret line="42" column="39" selection-start-line="42" selection-start-column="39" selection-end-line="42" selection-end-column="39" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3419,14 +3311,14 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/assets/breast-cancer-wisconsin.data" />
     <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/platforms/android-26/android.jar!/android/app/Activity.class" />
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider editor-type-id="android-manifest">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="4" column="69" selection-start-line="4" selection-start-column="69" selection-end-line="4" selection-end-column="69" />
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="android-manifest">
+        <state />
       </provider>
     </entry>
     <entry file="jar://$PROJECT_DIR$/weka-stable-3.8.0/weka-stable-3.8.0.jar!/weka/core/DenseInstance.class">
@@ -3445,54 +3337,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/siddprakash/mlbenchmarkgroup26/SplashActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
+        <state relative-caret-position="120">
           <caret line="11" column="32" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/siddprakash/mlbenchmarkgroup26/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1125">
-          <caret line="162" column="45" selection-start-line="162" selection-start-column="45" selection-end-line="162" selection-end-column="45" />
-          <folding>
-            <element signature="e#4620#4951#0" expanded="true" />
-            <element signature="e#4950#4951#0" expanded="true" />
-            <element signature="e#5580#6522#0" expanded="true" />
-            <element signature="e#6521#6522#0" expanded="true" />
-            <element signature="e#6646#7178#0" expanded="true" />
-            <element signature="e#7177#7178#0" expanded="true" />
-            <element signature="e#7220#7620#0" expanded="true" />
-            <element signature="e#7619#7620#0" expanded="true" />
-            <element signature="e#7795#9512#0" expanded="true" />
-            <element signature="e#9511#9512#0" expanded="true" />
-            <element signature="e#9640#12279#0" expanded="true" />
-            <element signature="e#12278#12279#0" expanded="true" />
-            <element signature="method#onRequestPermissionsResult#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#createPartition#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#getDataFromResource#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#SpinnerActivity#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#UploadTask#0;class#MainActivity#0" expanded="false" />
-            <element signature="e#23564#23869#0" expanded="true" />
-            <element signature="e#23868#23869#0" expanded="true" />
-            <element signature="e#26739#27113#0" expanded="true" />
-            <element signature="e#27112#27113#0" expanded="true" />
-            <element signature="e#27572#27886#0" expanded="true" />
-            <element signature="e#27885#27886#0" expanded="true" />
-            <element signature="e#28240#28529#0" expanded="true" />
-            <element signature="e#28528#28529#0" expanded="true" />
-            <element signature="class#DownloadTask#0;class#MainActivity#0" expanded="false" />
-            <element signature="e#30679#31170#0" expanded="true" />
-            <element signature="e#30790#31111#0" expanded="true" />
-            <element signature="e#31110#31111#0" expanded="true" />
-            <element signature="e#31169#31170#0" expanded="true" />
-            <element signature="method#CreateAppFolderIfNeed#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#copyFile#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#copyAsset#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#copyAssetsDataIfNeed#0;class#MainActivity#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -3538,7 +3385,7 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1466">
+        <state relative-caret-position="1980">
           <caret line="146" column="16" selection-start-line="146" selection-start-column="16" selection-end-line="146" selection-end-column="16" />
           <folding>
             <element signature="e#3489#4152#0" expanded="false" />
@@ -3553,11 +3400,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
           <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding>
-            <element signature="e#354#394#0" expanded="true" />
-            <element signature="e#690#710#0" expanded="true" />
-            <element signature="e#777#797#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3569,24 +3411,42 @@
         <state relative-caret-position="240">
           <caret line="24" column="46" selection-start-line="24" selection-start-column="46" selection-end-line="24" selection-end-column="46" />
           <folding>
-            <element signature="e#605#628#0" expanded="true" />
-            <element signature="e#1784#1803#0" expanded="true" />
+            <element signature="e#605#628#0" expanded="false" />
+            <element signature="e#1784#1803#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/siddprakash/mlbenchmarkgroup26/ViewLogFile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1020">
+          <caret line="84" column="57" selection-start-line="84" selection-start-column="57" selection-end-line="84" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/siddprakash/mlbenchmarkgroup26/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1905">
+          <caret line="180" column="42" selection-start-line="180" selection-start-column="42" selection-end-line="180" selection-end-column="42" />
+          <folding>
+            <element signature="method#onRequestPermissionsResult#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#getDataFromResource#0;class#MainActivity#0" expanded="false" />
+            <element signature="class#SpinnerActivity#0;class#MainActivity#0" expanded="false" />
+            <element signature="class#UploadTask#0;class#MainActivity#0" expanded="false" />
+            <element signature="class#DownloadTask#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#CreateAppFolderIfNeed#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#copyFile#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#copyAsset#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#copyAssetsDataIfNeed#0;class#MainActivity#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/siddprakash/mlbenchmarkgroup26/testingData.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-321">
-          <caret line="72" column="23" selection-start-line="72" selection-start-column="23" selection-end-line="72" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/siddprakash/mlbenchmarkgroup26/ViewLogFile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="84" column="57" selection-start-line="84" selection-start-column="57" selection-end-line="84" selection-end-column="57" />
+        <state relative-caret-position="840">
+          <caret line="72" column="30" selection-start-line="72" selection-start-column="30" selection-end-line="72" selection-end-column="30" />
           <folding />
         </state>
       </provider>

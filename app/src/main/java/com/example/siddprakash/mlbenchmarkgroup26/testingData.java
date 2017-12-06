@@ -32,6 +32,7 @@ public class testingData extends AppCompatActivity {
     private String TAG = "MLBENCHMARK";
 
     private String TRR, FRR, TAR, FAR, HTER, trainTime, testTime, testSummary, split, cv, k_nn, kernel;
+    private String timeStamp;
     private String log = "";
     private File logFile;
     private Bundle bundle;
@@ -54,6 +55,7 @@ public class testingData extends AppCompatActivity {
 
         bundle = this.getIntent().getExtras();
         if (bundle != null) {
+            timeStamp = (String) bundle.getSerializable("TimeStamp");
             vIntent = (Boolean) bundle.getSerializable("ViewIntent");
             split = (String)bundle.getSerializable("DataSplit");
             model = (String) bundle.getSerializable("Model");
@@ -68,6 +70,7 @@ public class testingData extends AppCompatActivity {
         k_nn = "5";
 
         log = "=================================================\n";
+        log = log+"TimeStamp: "+timeStamp+"\n";
 
         tv = (TextView) findViewById(R.id.tr_label);
         switch (model){
@@ -176,6 +179,7 @@ public class testingData extends AppCompatActivity {
         /*
         Format of log File for single experiment:
         ===============================================================================
+         TimeStamp: 2017-12-06T15:49:56Z
          Model: Support Vector Machine
          Cross Validation: 5
          SVM Kernel: Linear

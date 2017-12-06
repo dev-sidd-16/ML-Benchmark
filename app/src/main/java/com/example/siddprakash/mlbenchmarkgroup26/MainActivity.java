@@ -23,10 +23,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -35,11 +38,16 @@ import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
 import weka.core.Instances;
+import weka.core.converters.ArffSaver;
 import weka.core.pmml.jaxbbindings.False;
 
 public class MainActivity extends AppCompatActivity {
@@ -72,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
     private String trainFile;
     private String mname = "LR_";
     private String finalMName = mname;
+    private Instances test;
 
     private String appFolderPath = Environment.getExternalStorageDirectory() + "/Android/Data/MLBenchmark/";
 
@@ -167,7 +176,8 @@ public class MainActivity extends AppCompatActivity {
                        tv.setText("Yes");
                    }
 
-                   trainData = createPartition(dataSplit, trainFile);
+                   test = getDataFromResource(dataSplit, trainFile);
+
                    System.out.println(trainData);
                    Toast.makeText(MainActivity.this, "Split Dataset Created", Toast.LENGTH_LONG).show();
                 } catch (IOException e) {
@@ -263,8 +273,11 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG,"Testing Button Clicked");
 
                 try {
-                    Instances train = getDataFromResource(dataSplit, "Train");
-                    Instances test = getDataFromResource(dataSplit, "Test");
+
+                    BufferedReader reader = new BufferedReader(new FileReader(Environment.getExternalStorageDirectory()+"/Android/data/MLBenchmark/"+trainFile));
+                    Instances train = new Instances(reader);
+                    reader.close();
+                    train.setClassIndex(train.numAttributes() - 1);
 
                     File modelFile = new File(downloadFilePath+model);
                     if (!modelFile.exists()) {
@@ -274,25 +287,33 @@ public class MainActivity extends AppCompatActivity {
 
                         Toast.makeText(MainActivity.this, "Testing . . .", Toast.LENGTH_SHORT).show();
 
-                        FileInputStream fis = new FileInputStream(downloadFilePath + model);
-                        //Classifier cls = (Classifier) weka.core.SerializationHelper.read(fis);
+//                        FileInputStream fis = new FileInputStream(downloadFilePath + model);
+//                        Classifier cls = (Classifier) weka.core.SerializationHelper.read(fis);
                         Classifier cls = (Classifier) weka.core.SerializationHelper.read(Environment.getExternalStorageDirectory() + "/Android/data/MLBenchmark/" + model);
 //                    Classifier cls = (Classifier) weka.core.SerializationHelper.read(Environment.getExternalStorageDirectory()+"/Android/data/MLBenchmarkTest/abc.model");
-                        long testStart = System.currentTimeMillis();
+
                         Evaluation eval = new Evaluation(train);
+
+                        long testStart = System.currentTimeMillis();
+                        eval.evaluateModel(cls, test);
                         long testEnd = System.currentTimeMillis();
                         long tDelta = testEnd - testStart;
+
                         elapsedSeconds = tDelta;
 
-                        eval.evaluateModel(cls, test);
+
 
                         Boolean viewIntent = false;
+
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
+                        sdf.setTimeZone(TimeZone.getTimeZone("MST"));
+                        String ts = sdf.format(new Date());
 
                         Intent intent = new Intent();
                         Bundle bundle = new Bundle();
 
                         String d_Split = Float.toString(dataSplit);
-
+                        bundle.putSerializable("TimeStamp", ts);
                         bundle.putSerializable("DataSplit", d_Split);
                         bundle.putSerializable("ViewIntent", viewIntent);
                         bundle.putSerializable("Model", finalMName);
@@ -328,57 +349,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private String createPartition(float dataSplit, String fName) throws IOException {
-
-        File myFile = new File(Environment.getExternalStorageDirectory()+"/Android/data/MLBenchmark/breast-cancer-wisconsin.arff");
-        FileInputStream fIn = new FileInputStream(myFile);
-        BufferedReader r = new BufferedReader( new InputStreamReader( fIn ) );
-
-        String line;
-        int lineCount = 0;
-        int limit;
-        int count = 0;
-
-        try {
-            while ((line = r.readLine()) != null) {
-
-                lineCount++;
-            }
-            System.out.println("Number of lines: "+lineCount);
-        }
-        catch (Exception e) {
-            Log.e( "GetJsonFromResource", Log.getStackTraceString( e ) );
-        }
-
-        limit = (int) (dataSplit * lineCount);
-
-        System.out.println("Number of lines in training limit: "+limit);
-        fIn = new FileInputStream(myFile);
-        r = new BufferedReader(new InputStreamReader(fIn));
-
-        File outFile = new File(Environment.getExternalStorageDirectory()+"/Android/data/MLBenchmark/"+fName);
-        FileOutputStream fOut = new FileOutputStream(outFile);
-        PrintWriter pw = new PrintWriter(fOut);
-
-        try {
-            while (count <= limit ) {
-                line = r.readLine();
-                pw.println(line);
-                count++;
-            }
-        }
-        catch (Exception e) {
-            Log.e( "GetJsonFromResource", Log.getStackTraceString( e ) );
-        }
-        pw.flush();
-        pw.close();
-        fOut.close();
-
-        return "success";
-
-    }
-
-    public static Instances getDataFromResource(float dSplit, String status) throws IOException {
+    public static Instances getDataFromResource(float dSplit, String fName) throws IOException {
 
         //TODO: Convert breast-cancer-wisconsin.data to breast-cancer-wisconsin.arff
 
@@ -391,17 +362,20 @@ public class MainActivity extends AppCompatActivity {
             trainingSet.setClassIndex(trainingSet.numAttributes() - 1);
 
         trainingSet.deleteAttributeAt(0);
-        trainingSet.randomize(new java.util.Random(0));
+        trainingSet.randomize(new java.util.Random());
 
         int trainSize = (int) Math.round(trainingSet.numInstances() * dSplit);
         int testSize = trainingSet.numInstances() - trainSize;
         Instances train = new Instances(trainingSet, 0, trainSize);
+
+        BufferedWriter writer = new BufferedWriter(new FileWriter(Environment.getExternalStorageDirectory()+"/Android/data/MLBenchmark/"+fName));
+        writer.write(train.toString());
+        writer.flush();
+        writer.close();
+
         Instances test = new Instances(trainingSet, trainSize,testSize);
 
-        if(status.equalsIgnoreCase("Train"))
-            return train;
-        else
-            return test;
+        return test;
     }
 
     public class SpinnerActivity extends MainActivity implements AdapterView.OnItemSelectedListener {
