@@ -77,13 +77,12 @@ public class MainActivity extends AppCompatActivity {
     boolean begin = true;
     private Context context;
     private String trainData;
-    private String trainFile;
     private String mname = "LR_";
     private String finalMName = mname;
-    private Instances test;
 
     private String appFolderPath = Environment.getExternalStorageDirectory() + "/Android/Data/MLBenchmark/";
-
+    private String trainFile = "trainFile.arff";
+    private String testFile = "testFile.arff";
     private static final String uploadFilePath = Environment.getExternalStorageDirectory() + "/Android/Data/MLBenchmark/";
     private static final String downloadFilePath = Environment.getExternalStorageDirectory() + "/Android/Data/MLBenchmark/";
     public static final String upLoadURL = "http://ec2-54-219-146-0.us-west-1.compute.amazonaws.com:8080/upload/";
@@ -158,7 +157,6 @@ public class MainActivity extends AppCompatActivity {
 
         saveParams = (Button) findViewById(R.id.algoButton);
         // TODO: Need to check the format of traning file we need to send to server
-        trainFile = "trainFile"+algorithm+".arff";
 
         saveParams.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -176,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
                        tv.setText("Yes");
                    }
 
-                   test = getDataFromResource(dataSplit, trainFile);
+                   getDataFromResource(dataSplit, trainFile, testFile);
 
                    System.out.println(trainData);
                    Toast.makeText(MainActivity.this, "Split Dataset Created", Toast.LENGTH_LONG).show();
@@ -274,10 +272,15 @@ public class MainActivity extends AppCompatActivity {
 
                 try {
 
-                    BufferedReader reader = new BufferedReader(new FileReader(Environment.getExternalStorageDirectory()+"/Android/data/MLBenchmark/"+trainFile));
-                    Instances train = new Instances(reader);
-                    reader.close();
+                    BufferedReader reader1 = new BufferedReader(new FileReader(Environment.getExternalStorageDirectory() + "/Android/Data/MLBenchmark/"+trainFile));
+                    Instances train = new Instances(reader1);
+                    reader1.close();
                     train.setClassIndex(train.numAttributes() - 1);
+
+                    BufferedReader reader2 = new BufferedReader(new FileReader(Environment.getExternalStorageDirectory() + "/Android/Data/MLBenchmark/"+testFile));
+                    Instances test = new Instances(reader2);
+                    reader2.close();
+                    test.setClassIndex(test.numAttributes() - 1);
 
                     File modelFile = new File(downloadFilePath+model);
                     if (!modelFile.exists()) {
@@ -349,7 +352,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public static Instances getDataFromResource(float dSplit, String fName) throws IOException {
+    public static void getDataFromResource(float dSplit, String trainFName, String testFName) throws IOException {
 
         //TODO: Convert breast-cancer-wisconsin.data to breast-cancer-wisconsin.arff
 
@@ -368,14 +371,18 @@ public class MainActivity extends AppCompatActivity {
         int testSize = trainingSet.numInstances() - trainSize;
         Instances train = new Instances(trainingSet, 0, trainSize);
 
-        BufferedWriter writer = new BufferedWriter(new FileWriter(Environment.getExternalStorageDirectory()+"/Android/data/MLBenchmark/"+fName));
-        writer.write(train.toString());
-        writer.flush();
-        writer.close();
+        BufferedWriter writer1 = new BufferedWriter(new FileWriter(Environment.getExternalStorageDirectory() + "/Android/Data/MLBenchmark/"+trainFName));
+        writer1.write(train.toString());
+        writer1.flush();
+        writer1.close();
 
         Instances test = new Instances(trainingSet, trainSize,testSize);
+        BufferedWriter writer2 = new BufferedWriter(new FileWriter(Environment.getExternalStorageDirectory() + "/Android/Data/MLBenchmark/"+testFName));
+        writer2.write(test.toString());
+        writer2.flush();
+        writer2.close();
 
-        return test;
+        return;
     }
 
     public class SpinnerActivity extends MainActivity implements AdapterView.OnItemSelectedListener {

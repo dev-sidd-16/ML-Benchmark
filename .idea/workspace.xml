@@ -28,10 +28,10 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/siddprakash/mlbenchmarkgroup26/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/siddprakash/mlbenchmarkgroup26/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/siddprakash/mlbenchmarkgroup26/testingData.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/siddprakash/mlbenchmarkgroup26/testingData.java" />
     </list>
     <ignored path="ML Benchmark Group 26.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -63,14 +63,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/siddprakash/mlbenchmarkgroup26/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1905">
-              <caret line="180" column="42" selection-start-line="180" selection-start-column="42" selection-end-line="180" selection-end-column="42" />
+            <state relative-caret-position="-66">
+              <caret line="369" column="37" selection-start-line="369" selection-start-column="37" selection-end-line="369" selection-end-column="37" />
               <folding>
                 <element signature="method#onRequestPermissionsResult#0;class#MainActivity#0" expanded="false" />
-                <element signature="method#getDataFromResource#0;class#MainActivity#0" expanded="false" />
                 <element signature="class#SpinnerActivity#0;class#MainActivity#0" expanded="false" />
                 <element signature="class#UploadTask#0;class#MainActivity#0" expanded="false" />
                 <element signature="class#DownloadTask#0;class#MainActivity#0" expanded="false" />
@@ -88,17 +87,21 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="120">
               <caret line="11" column="32" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="testingData.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="testingData.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/siddprakash/mlbenchmarkgroup26/testingData.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="840">
               <caret line="72" column="30" selection-start-line="72" selection-start-column="30" selection-end-line="72" selection-end-column="30" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -106,9 +109,11 @@
       <file leaf-file-name="ViewLogFile.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/siddprakash/mlbenchmarkgroup26/ViewLogFile.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1020">
+            <state relative-caret-position="1065">
               <caret line="84" column="57" selection-start-line="84" selection-start-column="57" selection-end-line="84" selection-end-column="57" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -2992,7 +2997,7 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.55731595" sideWeight="0.18133971" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.48016998" sideWeight="0.81866026" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.48016998" sideWeight="0.81866026" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32911393" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286119" sideWeight="0.49353796" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3280522" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -3112,7 +3117,6 @@
           <caret line="204" column="50" selection-start-line="204" selection-start-column="50" selection-end-line="204" selection-end-column="50" />
           <folding>
             <element signature="method#onRequestPermissionsResult#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#getDataFromResource#0;class#MainActivity#0" expanded="false" />
             <element signature="class#SpinnerActivity#0;class#MainActivity#0" expanded="false" />
             <element signature="class#UploadTask#0;class#MainActivity#0" expanded="false" />
             <element signature="class#DownloadTask#0;class#MainActivity#0" expanded="false" />
@@ -3158,7 +3162,6 @@
           <caret line="54" column="38" selection-start-line="54" selection-start-column="38" selection-end-line="54" selection-end-column="38" />
           <folding>
             <element signature="method#onRequestPermissionsResult#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#getDataFromResource#0;class#MainActivity#0" expanded="false" />
             <element signature="class#SpinnerActivity#0;class#MainActivity#0" expanded="false" />
             <element signature="class#UploadTask#0;class#MainActivity#0" expanded="false" />
             <element signature="class#DownloadTask#0;class#MainActivity#0" expanded="false" />
@@ -3204,7 +3207,6 @@
           <caret line="51" column="11" selection-start-line="51" selection-start-column="11" selection-end-line="51" selection-end-column="11" />
           <folding>
             <element signature="method#onRequestPermissionsResult#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#getDataFromResource#0;class#MainActivity#0" expanded="false" />
             <element signature="class#SpinnerActivity#0;class#MainActivity#0" expanded="false" />
             <element signature="class#UploadTask#0;class#MainActivity#0" expanded="false" />
             <element signature="class#DownloadTask#0;class#MainActivity#0" expanded="false" />
@@ -3311,14 +3313,14 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/assets/breast-cancer-wisconsin.data" />
     <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/platforms/android-26/android.jar!/android/app/Activity.class" />
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="4" column="69" selection-start-line="4" selection-start-column="69" selection-end-line="4" selection-end-column="69" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-manifest">
-        <state />
       </provider>
     </entry>
     <entry file="jar://$PROJECT_DIR$/weka-stable-3.8.0/weka-stable-3.8.0.jar!/weka/core/DenseInstance.class">
@@ -3339,7 +3341,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="11" column="32" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -3366,17 +3370,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="70">
           <caret line="207" column="0" selection-start-line="207" selection-start-column="0" selection-end-line="207" selection-end-column="0" />
-          <folding>
-            <element signature="e#761#1764#0" expanded="false" />
-            <element signature="e#1773#2774#0" expanded="false" />
-            <element signature="e#2784#3731#0" expanded="false" />
-            <element signature="e#3741#4688#0" expanded="false" />
-            <element signature="e#4698#5646#0" expanded="false" />
-            <element signature="e#5656#6604#0" expanded="false" />
-            <element signature="e#6614#7551#0" expanded="false" />
-            <element signature="e#7561#8530#0" expanded="false" />
-            <element signature="e#8540#9506#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3410,35 +3403,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="24" column="46" selection-start-line="24" selection-start-column="46" selection-end-line="24" selection-end-column="46" />
-          <folding>
-            <element signature="e#605#628#0" expanded="false" />
-            <element signature="e#1784#1803#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/siddprakash/mlbenchmarkgroup26/ViewLogFile.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1020">
+        <state relative-caret-position="1065">
           <caret line="84" column="57" selection-start-line="84" selection-start-column="57" selection-end-line="84" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/siddprakash/mlbenchmarkgroup26/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1905">
-          <caret line="180" column="42" selection-start-line="180" selection-start-column="42" selection-end-line="180" selection-end-column="42" />
           <folding>
-            <element signature="method#onRequestPermissionsResult#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#getDataFromResource#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#SpinnerActivity#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#UploadTask#0;class#MainActivity#0" expanded="false" />
-            <element signature="class#DownloadTask#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#CreateAppFolderIfNeed#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#copyFile#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#copyAsset#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#copyAssetsDataIfNeed#0;class#MainActivity#0" expanded="false" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3447,7 +3420,26 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="840">
           <caret line="72" column="30" selection-start-line="72" selection-start-column="30" selection-end-line="72" selection-end-column="30" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/siddprakash/mlbenchmarkgroup26/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-66">
+          <caret line="369" column="37" selection-start-line="369" selection-start-column="37" selection-end-line="369" selection-end-column="37" />
+          <folding>
+            <element signature="method#onRequestPermissionsResult#0;class#MainActivity#0" expanded="false" />
+            <element signature="class#SpinnerActivity#0;class#MainActivity#0" expanded="false" />
+            <element signature="class#UploadTask#0;class#MainActivity#0" expanded="false" />
+            <element signature="class#DownloadTask#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#CreateAppFolderIfNeed#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#copyFile#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#copyAsset#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#copyAssetsDataIfNeed#0;class#MainActivity#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
