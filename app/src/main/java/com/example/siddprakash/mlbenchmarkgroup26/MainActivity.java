@@ -258,6 +258,69 @@ public class MainActivity extends AppCompatActivity {
                 else{
                     tv.setText("Yes");
                 }
+                /*
+                 else {
+
+                    final ConcurrentHashMap<String, Double> acc = new ConcurrentHashMap<String, Double>();
+                    Runnable runnable = new Runnable() {
+                        @Override
+                        public void run() {
+                            DataSource source = new DataSource(trainFile);
+
+                            Instances trainingSet = source.getDataSet();
+                            if (trainingSet.classIndex() == -1)
+                                trainingSet.setClassIndex(trainingSet.numAttributes() - 1);
+
+                            trainingSet.deleteAttributeAt(0);
+                            trainingSet.randomize(new java.util.Random(0));
+                            int trainSize = (int) Math.round(trainingSet.numInstances() * 0.8);
+                            int testSize = trainingSet.numInstances() - trainSize;
+                            Instances train = new Instances(trainingSet, 0, trainSize);
+                            Instances test = new Instances(trainingSet, trainSize, testSize);
+                            if (mname.startsWith("SVM")) {
+                                SMO classifier = new SMO();
+                                classifier.buildClassifier(train);
+                                weka.core.SerializationHelper.write("svm.model", classifier);
+                            } else if (mname.startsWith("LR")){
+                                Logistic logistic = new Logistic();
+                                logistic.buildClassifier(trainingSet);
+                                weka.core.SerializationHelper.write("lr.model", logistic);
+
+                            }else if (mname.startsWith("KNN")){
+                                IBk ibk = new IBk(3);
+                                ibk.buildClassifier(trainingSet);
+                                weka.core.SerializationHelper.write("knn.model", ibk);
+
+                            }else if (mname.startsWith("NB")){
+                                NaiveBayes classifier = new NaiveBayes();
+                                classifier.buildClassifier(trainingSet);
+                                weka.core.SerializationHelper.write("nb.model", classifier);
+                            }
+                            Evaluation eval = new Evaluation(train);
+                            eval.evaluateModel(cls, test);
+                            acc.put(Thread.currentThread().getName(),eval.pctCorrect());
+                        }
+                    };
+                    List<Thread> threads = new ArrayList<Thread>();
+                    for(int thread_i=0; thread_i < 5; thread_i++){
+                        Thread thread = new Thread("Thread_"+ Integer.toString(thread_i));
+                        thread.start();
+                        threads.start(thread);
+                        Log.d("Multi Thread", "Thread Strarted" + thread.getName());
+                    }
+                    for(Thread thread:threads){
+                        try{
+                            thread.join();
+                        } catch(InterruptedException ex){
+                            ex.printStackTrace();
+                        }
+
+                    }
+
+                    Double dbl = acc.values().stream().sum();
+                    Toast.makeText(MainActivity.this, "Multithreaded Cross Validation Accuracy " + Double.toString(dbl), Toast.LENGTH_LONG).show();
+                }
+                 */
 
             }
         });
